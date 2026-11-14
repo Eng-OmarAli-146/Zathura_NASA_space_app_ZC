@@ -8,7 +8,32 @@ const fs = require('fs');
 const path = require('path');
 
 const SRC = path.join(__dirname, 'src');
-const OUT = path.join(__dirname, 'play.html');
+const OUT = path.join(__dirname, 'play', 'game1.html');
+
+/* ----------------------------------------------------------------------------
+   QA hooks (window.__completeAll, Board, Return.skipTo, _grant …) live in src/
+   between the @QA-BEGIN and @QA-END marker comments, so they stay available
+   while developing but never ship to players.
+
+   Default build  → QA blocks removed   (this is the file we commit & serve)
+   --dev          → QA blocks kept      (local debugging only)
+   -------------------------------------------------------------------------- */
+const DEV = process.argv.includes('--dev');
+const QA_BEGIN = '/* @QA-BEGIN */';
+const QA_END = '/* @QA-END */';
+
+function stripQA(source) {
+  const out = [];
+  let inside = false;
+  for (const line of source.split('\n')) {
+    const t = line.trim();
+    if (t === QA_BEGIN) { inside = true; continue; }
+    if (t === QA_END) { inside = false; continue; }
+    if (inside && !DEV) continue;
+    out.push(line);
+  }
+  return out.join('\n');
+}
 
 const JS_ORDER = [
   'missiondata.js',
@@ -33,7 +58,7 @@ const css = read('styles.css');
 const js = JS_ORDER.map(f => `\n/* ══════════════════ ${f} ══════════════════ */\n` + read(f)).join('\n');
 
 // حماية: لو ظهر </script> جوه الكود يكسر الحقن
-const safeJs = js.replace(/<\/script>/gi, '<\\/script>');
+const safeJs = stripQA(js).replace(/<\/script>/gi, '<\\/script>');
 
 const html = `<!doctype html>
 <html lang="ar" dir="rtl">
@@ -270,4 +295,4 @@ document.addEventListener('DOMContentLoaded', () => {
 fs.writeFileSync(OUT, html, 'utf8');
 const kb = (Buffer.byteLength(html) / 1024).toFixed(1);
 console.log('✓ built', path.relative(process.cwd(), OUT), `(${kb} KB)`);
-console.log('  js files:', JS_ORDER.length, '· css:', (css.length / 1024).toFixed(1) + ' KB');
+console.log('  js files:', JS_ORDER.length, '· css:', (css.length / 1024).toFixed(1) + ' KB', '·', DEV ? 'dev build (QA hooks kept)' : 'submission build (QA hooks stripped)');

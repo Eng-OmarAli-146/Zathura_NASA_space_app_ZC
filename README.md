@@ -14,13 +14,24 @@
 [![No dependencies](https://img.shields.io/badge/dependencies-0-ffb454.svg)](package.json)
 [![NASA Space Apps 2026](https://img.shields.io/badge/NASA%20Space%20Apps-2026-ffffff.svg)](https://www.spaceappschallenge.org/)
 
-[**▶ العب الآن**](play.html) · [**صفحة المشروع**](index.html) · [**تدقيق المصادر**](SOURCES-AUDIT.md) · [**ملاحظات التصميم**](DESIGN.md)
+[**▶ العب الآن**](play/) · [**صفحة المشروع**](index.html) · [**المرجع العلمي (PDF)**](docs/science-reference-15-scenarios-ar.pdf) · [**تدقيق المصادر**](SOURCES-AUDIT.md) · [**ملاحظات التصميم**](DESIGN.md)
 
 <sub>العربية ↓ · [English ↓](#-english)</sub>
 
 </div>
 
-<img src="assets/shot-storm.jpg" width="100%" alt="لقطة من اللعبة: عاصفة شمسية على سطح المريخ مع تحذير DONKI وشريط موارد حيّ">
+<img src="assets/shot-launcher.jpg" width="100%" alt="بوابة ZATHURA: اختيار الوضع بين محاكي القاعدة وأوديسي">
+
+<table>
+<tr>
+<td width="50%"><img src="assets/shot-storm.jpg" alt="الوضع ١ — عاصفة شمسية على المريخ"></td>
+<td width="50%"><img src="assets/shot-odyssey-ingame.jpg" alt="الوضع ٢ — أوديسي بالمنظور الأول"></td>
+</tr>
+<tr>
+<td><sub><b>MODE 01 · Outpost</b> — قاعدة + EVA على Canvas 2D</sub></td>
+<td><sub><b>MODE 02 · Odyssey</b> — منظور أول 3D (React + Three.js)</sub></td>
+</tr>
+</table>
 
 ---
 
@@ -77,31 +88,50 @@
 > ⚠️ **أمانة علمية:** الأرقام محاكاة تعليمية مبنية على قيم منشورة وليست قياسات حيّة.
 > وحدة RadLab غير موثّقة علنًا، ومصادر DONKI بجودة «prototyping» وليست تنبؤات رسمية (المرجع NOAA SWPC).
 
+### وضعان للعب — بوابة واحدة
+
+| | الوضع ١ — محاكي القاعدة | الوضع ٢ — أوديسي: مهمة البقاء |
+|---|---|---|
+| اللعبة | ZATHURA Outpost v3.3.0 «العالم الحي» | Odyssey: Survive — من الإطلاق للهبوط |
+| المنظور | إدارة موارد + EVA على Canvas 2D | منظور أول 3D داخل المركبة |
+| التحكم | WASD/أسهم + E مطوّل | WASD + ماوس (Pointer Lock) + E مطوّل + لمس |
+| الوجهات | ٦: القمر · المريخ · عطارد · الزهرة · زحل/تايتان · زويل | نفس الستة بنفس الصعوبة |
+| الرابط | [`play/game1.html`](play/game1.html) | [`play/game2.html`](play/game2.html) |
+
+البوابة: [`play/index.html`](play/index.html) — حزمة واحدة تُنسخ كما هي وتعمل أوفلاين.
+
 ### التشغيل
 
 | الطريقة | الخطوات |
 |---|---|
-| **الأسرع** | افتح [`play.html`](play.html) في أي متصفح حديث. |
-| للتطوير | `node build.js` — يجمع `src/` في `play.html` (إعادة إنتاج مطابقة بايت ببايت). |
-| للتحقق | `node tools/verify-build.js` — يتأكد أن `play.html` مطابق لما ينتجه البناء. |
+| **الأسرع** | افتح [`play/index.html`](play/index.html) واختار الوضع — أو [الوضع ١](play/game1.html) / [الوضع ٢](play/game2.html) مباشرة. |
+| للتطوير | `node build.js` — يجمع `src/` في `play/game1.html` مع **إزالة أدوات الاختبار** (إعادة إنتاج مطابقة بايت ببايت). |
+| أدوات QA | `node build.js --dev` — نفس البناء مع إبقاء كتل `@QA-BEGIN/@QA-END` للتطوير المحلي فقط. |
+| للتحقق | `node tools/verify-build.js` — يتأكد أن `play/game1.html` مطابق لما ينتجه البناء (CI يشغّله مع كل push). |
 | محليًا | `python3 -m http.server 8080` ثم افتح `http://localhost:8080`. |
 
 ### البنية
 
 ```
-src/                    →  يُجمع في  play.html
-├─ missiondata.js       البيانات: 6 مهام · 27 سيناريو · 18 مصدر · ثوابت المحاكاة
+play/                   →  حزمة اللعب الجاهزة (تُنسخ كما هي، أوفلاين)
+├─ index.html           بوابة اختيار الوضع
+├─ game1.html           الوضع ١ — ناتج البناء من src/ (524 KB)
+└─ game2.html           الوضع ٢ — أوديسي (1.7 MB، React + Three.js مضمّنين)
+
+src/                    →  يُجمع في  play/game1.html
+├─ missiondata.js       البيانات: 6 مهام · 36 سيناريو · 22 مصدر · ثوابت المحاكاة
 ├─ core.js              الحالة · الصوت (WebAudio) · الراوتر · المودالات
 ├─ render.js            كواكب · نجوم · رائد · جزيئات · ثيمات
 ├─ quests.js            محرّك «مهمتي» والتسلسل
 ├─ screens_*.js         intro · hq · launch · outpost · return · result
 └─ styles.css
 
-build.js                →  src/ ← play.html (ملف واحد مكتفٍ بذاته)
+build.js                →  src/ ← play/game1.html (ملف واحد، أدوات QA مُزالة)
 index.html              →  صفحة المشروع (GitHub Pages)
 assets/                 →  لقطات · أيقونة · site.css · site.js
 data/donki/             →  أرشيف أحداث مايو ٢٠٢٤
 tools/verify-build.js   →  فحص قابلية إعادة البناء
+docs/                   →  المرجع العلمي (15 سيناريو، PDF)
 ```
 
 كل شاشة تسجّل نفسها بـ `registerScreen(name, {mount, unmount})` والراوتر ينقل بـ `go(name)`،
@@ -132,7 +162,8 @@ You cannot do everything — and that is the lesson: exploration is a sequence o
 
 A browser-based space base management trainer for **ages 7–12**, built for the
 **NASA Space Apps Challenge 2026** (*The Next Frontier*) under the *Junior Astronaut Mission Trainer* brief.
-Six destinations, 27 adaptive scenarios across 15 scene types, 18 attributed NASA sources.
+Two playable modes (a strategic base simulator and a first-person 3D survival mission),
+six destinations, 36 adaptive scenarios and 22 attributed NASA sources.
 Everything runs offline from a single HTML file — no install, no accounts, no network calls.
 
 ### Why it is different
@@ -168,10 +199,13 @@ RadLab’s unit is not publicly documented, and DONKI sources are prototyping qu
 
 ```bash
 # fastest — just open the built file
-play.html
+play/index.html
 
-# rebuild from src/ (byte-for-byte reproducible)
+# rebuild Mode 1 from src/ (QA hooks stripped, byte-for-byte reproducible)
 node build.js
+
+# local debugging build that keeps the QA hooks
+node build.js --dev
 
 # confirm the committed build matches src/
 node tools/verify-build.js
@@ -181,7 +215,8 @@ node tools/verify-build.js
 
 ```
 src/            ten modules + stylesheet → concatenated by build.js
-play.html       committed build (≈526 KB, fully self-contained)
+play/           the shippable package: launcher + game1 (Mode 1) + game2 (Mode 2)
+docs/           science reference PDF (15 scenarios, Arabic)
 index.html      the project page (GitHub Pages)
 assets/         screenshots, icon, project-page CSS/JS
 data/donki/     cached May 2024 DONKI events
