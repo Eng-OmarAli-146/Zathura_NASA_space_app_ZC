@@ -1,0 +1,28 @@
+{
+  "name": "zathura-trainer",
+  "version": "3.3.0",
+  "private": true,
+  "description": "ZATHURA — Junior Astronaut Mission Trainer | NASA Space Apps Challenge 2026 educational prototype",
+  "homepage": "https://eng-omarali-146.github.io/Zathura_NASA_space_app_ZC/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC.git"
+  },
+  "scripts": {
+    "build": "node build.js",
+    "serve": "python3 -m http.server 8080",
+    "verify": "node tools/verify-build.js",
+    "test": "node build.js && node tools/verify-build.js"
+  },
+  "keywords": [
+    "nasa-space-apps",
+    "educational-game",
+    "space-simulation",
+    "isru",
+    "arabic",
+    "offline",
+    "canvas",
+    "web-audio"
+  ],
+  "license": "MIT"
+}

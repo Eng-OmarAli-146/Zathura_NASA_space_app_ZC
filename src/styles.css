@@ -1,0 +1,501 @@
+/* ============================================================================
+   styles.css — نظام تصميم موحّد لكل شاشات اللعبة
+   خطوط النظام فقط (بدون CDN) — يشتغل أوفلاين
+   ==========================================================================*/
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#05070c;
+  --bg2:#080d16;
+  --panel:rgba(10,16,26,.92);
+  --panel2:rgba(16,26,42,.94);
+  --line:rgba(120,180,230,.18);
+  --line2:rgba(120,180,230,.34);
+  --txt:#eaf0fc;
+  --dim:#8497b8;
+  --dim2:#5d6d8c;
+  --cyan:#4dd9ff;
+  --amber:#ffb347;
+  --red:#ff5f6d;
+  --green:#45e08a;
+  --purple:#9b7bff;
+  --accent:#4dd9ff;
+  --r:14px;
+  --shadow-lg:0 30px 80px rgba(0,0,0,.65);
+  --font:"Segoe UI",Tahoma,"Noto Kufi Arabic","Helvetica Neue",system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+
+html,body{height:100%}
+body{
+  background:var(--bg); color:var(--txt); font-family:var(--font);
+  overflow:hidden; -webkit-font-smoothing:antialiased;
+  font-size:15px; line-height:1.5;
+}
+button{font-family:inherit}
+::-webkit-scrollbar{width:9px;height:9px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(120,180,230,.25);border-radius:9px}
+::-webkit-scrollbar-thumb:hover{background:rgba(120,180,230,.45)}
+
+/* ============================================================ APP SHELL */
+#app{position:fixed;inset:0;overflow:hidden}
+
+.screen{
+  position:absolute;inset:0;display:none;opacity:0;
+  transition:opacity .55s ease;
+  will-change:opacity;
+}
+.screen.active{display:block;opacity:1}
+.screen.fade-in{animation:screenIn .6s cubic-bezier(.16,.84,.3,1) both}
+@keyframes screenIn{from{opacity:0;transform:scale(1.012)}to{opacity:1;transform:none}}
+
+/* ============================================================ VEIL / LOADING */
+.veil{
+  position:absolute;inset:0;background:#000;z-index:900;
+  display:grid;place-items:center;opacity:1;transition:opacity .7s ease;
+}
+.veil.gone{opacity:0;pointer-events:none}
+.veil .vi{text-align:center}
+
+/* ============================================================ TYPOGRAPHY */
+.eyebrow{
+  font-size:10.5px;font-weight:900;letter-spacing:3.4px;
+  color:var(--cyan);text-transform:uppercase;
+}
+.h1{font-size:clamp(26px,4.4vw,52px);font-weight:900;letter-spacing:-1.2px;line-height:1.08}
+.h2{font-size:clamp(20px,2.6vw,30px);font-weight:900;letter-spacing:-.7px}
+.h3{font-size:17px;font-weight:900;letter-spacing:-.2px}
+.sub{color:var(--dim);font-size:13.5px;line-height:1.75}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* ============================================================ BUTTONS */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  border:none;cursor:pointer;border-radius:12px;
+  font-size:13.5px;font-weight:900;letter-spacing:.2px;
+  padding:13px 26px;transition:transform .16s,filter .16s,box-shadow .16s;
+  background:linear-gradient(100deg,var(--cyan),#7ba4ff);color:#05101f;
+  box-shadow:0 10px 26px rgba(77,217,255,.22);
+}
+.btn:hover{filter:brightness(1.09);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn:disabled{opacity:.34;cursor:not-allowed;filter:none;transform:none}
+.btn.ghost{
+  background:rgba(255,255,255,.045);color:var(--txt);
+  border:1px solid var(--line2);box-shadow:none;
+}
+.btn.ghost:hover{background:rgba(255,255,255,.09);border-color:var(--cyan)}
+.btn.sm{padding:9px 16px;font-size:12px;border-radius:10px}
+.btn.danger{background:linear-gradient(100deg,#ff5f6d,#ff9068);box-shadow:0 10px 26px rgba(255,95,109,.22)}
+.btn.wide{width:100%}
+
+.icon-btn{
+  width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
+  border:1px solid var(--line2);background:rgba(255,255,255,.045);
+  cursor:pointer;color:var(--txt);transition:.16s;font-size:15px;flex:0 0 auto;
+}
+.icon-btn:hover{background:rgba(77,217,255,.14);border-color:var(--cyan)}
+
+/* ============================================================ TOP HUD */
+.hud{
+  position:absolute;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;gap:10px;padding:12px 16px;
+  background:linear-gradient(180deg,rgba(3,6,11,.92),rgba(3,6,11,0));
+  pointer-events:none;
+}
+.hud > *{pointer-events:auto}
+.hud .brand{
+  display:flex;align-items:center;gap:11px;text-decoration:none;
+}
+.hud .brand .mark{
+  width:34px;height:34px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 32%,#7fe3ff,#1288ad 70%,#0a5a78);
+  box-shadow:0 0 20px rgba(77,217,255,.45);
+}
+.hud .brand-txt{
+  font-weight:900;letter-spacing:.28em;font-size:14px;color:var(--txt);line-height:1.15;white-space:nowrap;
+}
+.hud .brand-txt b{color:var(--cyan)}
+.hud .brand-txt .tag{
+  display:block;font-size:8px;letter-spacing:.34em;color:var(--dim2);font-weight:600;margin-top:2px;
+}
+@media (max-width:640px){.hud .brand-txt .tag{display:none}.hud .brand-txt{font-size:12px}}
+.hud .spacer{flex:1}
+
+.pill{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:6px 12px;border-radius:999px;font-size:11.5px;font-weight:800;
+  background:rgba(255,255,255,.05);border:1px solid var(--line);
+  color:var(--dim);white-space:nowrap;
+}
+.pill b{color:var(--txt)}
+.pill.ok{border-color:rgba(69,224,138,.45);color:var(--green)}
+.pill.warn{border-color:rgba(255,179,71,.45);color:var(--amber)}
+.pill.bad{border-color:rgba(255,95,109,.5);color:var(--red)}
+.pill.live{border-color:rgba(69,224,138,.5);background:rgba(69,224,138,.1);color:var(--green)}
+.pill.cached{border-color:rgba(255,179,71,.5);background:rgba(255,179,71,.1);color:var(--amber)}
+
+.dot{width:6px;height:6px;border-radius:50%;background:currentColor;flex:0 0 auto}
+.dot.pulse{animation:dotPulse 1.6s infinite}
+@keyframes dotPulse{0%,100%{opacity:1;box-shadow:0 0 0 0 currentColor}50%{opacity:.5;box-shadow:0 0 0 5px transparent}}
+
+/* ============================================================ CARDS */
+.card{
+  background:linear-gradient(165deg,var(--panel2),var(--panel));
+  border:1px solid var(--line);border-radius:var(--r);
+  padding:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
+}
+.card.tight{padding:13px}
+.card.glass{backdrop-filter:blur(14px)}
+
+/* ============================================================ LAYOUT UTIL */
+.row{display:flex;gap:12px;align-items:center}
+.col{display:flex;flex-direction:column}
+.grow{flex:1;min-width:0}
+.wrap{flex-wrap:wrap}
+.gap6{gap:6px}.gap8{gap:8px}.gap10{gap:10px}.gap14{gap:14px}.gap20{gap:20px}
+.center{display:grid;place-items:center}
+.hidden{display:none !important}
+
+/* ============================================================ STATS */
+.stat{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;
+  padding:9px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13px;
+}
+.stat:last-child{border-bottom:none}
+.stat .k{color:var(--dim);font-size:12.5px}
+.stat .v{font-weight:900;font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:plaintext}
+
+/* ============================================================ BARS */
+.bar{height:6px;border-radius:99px;background:rgba(255,255,255,.1);overflow:hidden}
+.bar > i{display:block;height:100%;border-radius:99px;transition:width .4s ease,background .3s}
+
+/* ============================================================ MODAL */
+.modal{
+  position:absolute;inset:0;z-index:800;display:none;
+  background:rgba(2,4,8,.86);backdrop-filter:blur(6px);
+  padding:24px;overflow-y:auto;
+}
+.modal.open{display:flex;align-items:flex-start;justify-content:center;animation:modalIn .28s ease}
+@keyframes modalIn{from{opacity:0}to{opacity:1}}
+.modal-card{
+  width:min(720px,100%);max-height:88vh;overflow-y:auto;margin:auto;
+  background:linear-gradient(170deg,#101a2c,#080e18);
+  border:1px solid var(--line2);border-radius:20px;padding:26px;
+  box-shadow:var(--shadow-lg);animation:cardUp .35s cubic-bezier(.16,.84,.3,1);
+}
+@keyframes cardUp{from{transform:translateY(22px);opacity:0}to{transform:none;opacity:1}}
+
+/* ============================================================ SOURCES LIST */
+.src-item{
+  padding:14px;border-radius:12px;border:1px solid var(--line);
+  background:rgba(255,255,255,.025);margin-bottom:10px;transition:.15s;
+}
+.src-item:hover{background:rgba(77,217,255,.06);border-color:rgba(77,217,255,.3)}
+.src-item a{color:var(--cyan);text-decoration:none;font-weight:800;font-size:13.5px}
+.src-item a:hover{text-decoration:underline}
+.src-item .sd{font-size:12px;color:var(--dim);line-height:1.7;margin-top:5px}
+.src-item .sv{font-size:11.5px;font-family:var(--mono);color:var(--amber);margin-top:6px}
+
+/* ============================================================ TOAST */
+#toasts{
+  position:absolute;bottom:18px;left:18px;z-index:700;
+  display:flex;flex-direction:column;gap:8px;max-width:400px;pointer-events:none;
+}
+.toast{
+  background:linear-gradient(160deg,rgba(10,17,28,.96),rgba(7,12,20,.94));
+  border:1px solid var(--line2);border-inline-start:3px solid var(--cyan);
+  border-radius:5px 12px 12px 5px;padding:11px 15px;font-size:12.5px;line-height:1.65;
+  box-shadow:0 10px 30px rgba(0,0,0,.5);animation:toastIn .32s cubic-bezier(.2,.8,.3,1);
+}
+.toast.warn{border-inline-start-color:var(--amber)}
+.toast.bad{border-inline-start-color:var(--red)}
+.toast.good{border-inline-start-color:var(--green)}
+.toast.out{animation:toastOut .4s forwards}
+@keyframes toastIn{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+@keyframes toastOut{to{opacity:0;transform:translateX(-14px)}}
+
+/* ============================================================ WATERMARK */
+.watermark{
+  position:absolute;bottom:8px;right:10px;z-index:50;
+  font-size:9.5px;color:rgba(132,151,184,.5);letter-spacing:.4px;
+  pointer-events:none;user-select:none;text-align:right;line-height:1.5;
+}
+
+/* ===================== استجابة الشاشات الصغيرة ===================== */
+@media (max-width: 760px) {
+  /* شريط الموارد: سطر واحد قابل للتمرير بدل التداخل */
+  #out-hud {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: flex-start !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    top: 96px !important;
+    left: 10px !important;
+    right: 10px !important;
+    padding-bottom: 4px;
+    gap: 6px !important;
+  }
+  #out-hud::-webkit-scrollbar { display: none; }
+  #out-hud > .card {
+    width: auto !important;
+    min-width: 84px !important;
+    padding: 5px 8px !important;
+    flex: 0 0 auto !important;
+  }
+  #out-hud .mono { font-size: 12px !important; }
+  #out-hud .bar { min-width: 34px; }
+  #out-log { width: min(280px, 54%) !important; bottom: 104px !important; }
+  .hud #brand, .hud .brand { transform: scale(.86); transform-origin: top right; }
+  #toasts { top: 150px !important; }
+  #out-hint { display: none !important; }
+  #out-act { font-size: 11px !important; padding: 7px 12px !important; }
+  #p-drawer, #out-panel { width: min(330px, 92vw) !important; padding-top: 64px !important; }
+  #event-card { width: 100% !important; max-height: 74vh; overflow-y: auto; }
+  .watermark { font-size: 8px !important; bottom: 4px !important; opacity: .35 !important; }
+}
+
+/* لوحة تحكم لمسية */
+#touch-pad {
+  position: absolute; z-index: 60; inset-inline-start: 14px; bottom: 18px;
+  display: none; grid-template-columns: repeat(3, 46px); grid-template-rows: repeat(3, 46px);
+  gap: 4px; touch-action: none;
+}
+#touch-pad.on { display: grid; }
+#touch-pad button {
+  border-radius: 12px; border: 1px solid rgba(120,190,240,.35);
+  background: rgba(8,18,30,.78); color: #bfe6ff; font-size: 15px; font-weight: 900;
+  display: grid; place-items: center; backdrop-filter: blur(6px);
+  -webkit-user-select: none; user-select: none; touch-action: none;
+}
+#touch-pad button:active { background: rgba(45,110,160,.85); transform: scale(.96); }
+#touch-e {
+  position: absolute; z-index: 60; inset-inline-end: 18px; bottom: 30px;
+  width: 66px; height: 66px; border-radius: 50%; display: none;
+  border: 1px solid rgba(77,217,255,.55); background: rgba(10,28,44,.82);
+  color: #8ee6ff; font-weight: 900; font-size: 13px; backdrop-filter: blur(6px);
+  touch-action: none;
+}
+#touch-e.on { display: grid; place-items: center; }
+#touch-e:active { background: rgba(30,110,160,.9); transform: scale(.95); }
+
+/* ===================== قائمة المهام (Quest Chain) ===================== */
+.ret-hud .mono, .quest-count{direction:ltr;unicode-bidi:plaintext}
+.quest-panel{
+  position:absolute;top:64px;inset-inline-start:16px;z-index:26;width:min(238px,42vw);
+  display:flex;flex-direction:column;gap:6px;pointer-events:none;
+}
+.quest-head{
+  display:flex;align-items:baseline;gap:8px;padding:0 4px 2px;
+  border-bottom:1px solid rgba(120,190,240,.18);padding-bottom:6px
+}
+.quest-kicker{font-family:var(--mono);font-size:8px;letter-spacing:2.4px;color:var(--cyan);opacity:.85;font-weight:700}
+.quest-title{font-size:11px;font-weight:900;color:#dceaff}
+.quest-count{margin-inline-start:auto;font-size:9.5px;color:var(--dim)}
+.quest-items{display:flex;flex-direction:column;gap:5px;pointer-events:auto}
+.quest{
+  display:flex;align-items:center;gap:8px;padding:7px 9px;border-radius:12px;
+  background:rgba(6,12,20,.66);border:1px solid rgba(120,190,240,.14);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  transition:border-color .3s,background .3s,opacity .3s,transform .3s
+}
+.quest .tick{
+  width:19px;height:19px;border-radius:50%;flex:0 0 auto;display:grid;place-items:center;
+  border:1.5px solid rgba(150,205,245,.38);color:#9fc8e8;
+}
+.quest .tick .mono{font-style:normal;font-size:10px;font-weight:800}
+.quest .qt{font-size:10.5px;line-height:1.45;color:#e6eef8;font-weight:700}
+.quest .qp{margin-inline-start:auto;font-size:9.5px;color:var(--dim);direction:ltr;unicode-bidi:plaintext}
+.quest.current{
+  border-color:rgba(77,217,255,.5);background:rgba(10,26,40,.78);
+  box-shadow:0 0 0 1px rgba(77,217,255,.12),0 10px 30px rgba(0,0,0,.35)
+}
+.quest.current .tick{border-color:var(--cyan);color:var(--cyan);box-shadow:0 0 10px rgba(77,217,255,.35)}
+.quest.done{opacity:.62;border-color:rgba(69,224,138,.35)}
+.quest.done .tick{background:#45e08a;border-color:#45e08a}
+.quest.done .qt{color:#8fe3b4;text-decoration:line-through;text-decoration-color:rgba(69,224,138,.5)}
+.quest.locked{opacity:.42}
+.quest.pop{animation:questPop .45s cubic-bezier(.2,1.4,.35,1)}
+@keyframes questPop{
+  0%{transform:scale(1)}
+  35%{transform:scale(1.16);box-shadow:0 0 0 2px rgba(69,224,138,.6)}
+  100%{transform:scale(1)}
+}
+.quest-launch{
+  margin-top:4px;pointer-events:auto;cursor:pointer;
+  border:1px solid rgba(255,196,90,.55);border-radius:14px;
+  background:linear-gradient(120deg,#ffb347,#ff8a5c);color:#2a1200;
+  font-family:inherit;font-weight:900;font-size:12.5px;padding:11px 12px;
+  box-shadow:0 10px 34px rgba(255,150,60,.28);transition:transform .2s,filter .2s;
+  animation:launchPulse 1.6s ease-in-out infinite
+}
+.quest-launch:hover{transform:translateY(-1px);filter:brightness(1.08)}
+@keyframes launchPulse{0%,100%{box-shadow:0 8px 26px rgba(255,150,60,.22)}50%{box-shadow:0 8px 44px rgba(255,150,60,.45)}}
+
+/* ===================== زر الإشعال (إقلاع تفاعلي) ===================== */
+#ign{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding-bottom:4.5%;pointer-events:none}
+#ign-hold{
+  position:relative;pointer-events:auto;cursor:pointer;user-select:none;-webkit-user-select:none;touch-action:none;
+  width:142px;height:142px;border-radius:50%;border:1px solid rgba(120,228,255,.55);
+  background:radial-gradient(circle at 50% 35%,#163d5c 0%,#0e2438 52%,#060d18 100%);
+  color:#d8f3ff;font-family:inherit;font-weight:900;font-size:20px;line-height:1.2;letter-spacing:8px;
+  box-shadow:0 0 0 4px rgba(7,16,27,.95),0 0 52px rgba(77,217,255,.36),inset 0 -17px 36px rgba(0,0,0,.55),inset 0 7px 20px rgba(150,232,255,.16);
+  transition:transform .16s,box-shadow .28s,border-color .28s,color .28s,background .28s,filter .16s;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:0
+}
+#ign-hold .ign-word{position:relative;text-indent:8px;text-shadow:0 0 20px rgba(120,228,255,.7),0 2px 6px rgba(0,0,0,.6)}
+#ign-hold small{position:relative;font-size:8px;font-weight:800;letter-spacing:2.1px;color:#7fc4e8;opacity:.95}
+#ign-hold:hover{filter:brightness(1.15);box-shadow:0 0 0 4px rgba(7,16,27,.95),0 0 66px rgba(77,217,255,.5),inset 0 -17px 36px rgba(0,0,0,.55),inset 0 7px 20px rgba(150,232,255,.2)}
+#ign-hold:focus-visible{outline:2px solid #8fe8ff;outline-offset:6px}
+#ign-hold:active{transform:scale(.96)}
+#ign-hold.holding{
+  transform:scale(.93);border-color:rgba(255,196,110,.85);color:#ffe6ba;
+  background:radial-gradient(circle at 50% 37%,#4d2c11 0%,#26120a 55%,#0e0703 100%);
+  box-shadow:0 0 0 4px rgba(34,17,5,.95),0 0 76px rgba(255,150,60,.6),inset 0 -15px 32px rgba(0,0,0,.6),inset 0 7px 20px rgba(255,196,110,.2)
+}
+#ign-hold.holding small{color:#ffc57e}
+#ign-hold.holding .ign-word{text-shadow:0 0 24px rgba(255,180,90,.8),0 2px 6px rgba(0,0,0,.7)}
+#ign-ring{
+  position:absolute;inset:-11px;border-radius:50%;pointer-events:none;opacity:.95;
+  background:conic-gradient(from -90deg,#ffd07a calc(var(--p,0)*1turn),rgba(110,220,255,.08) 0);
+  -webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 calc(100% - 5px));
+  mask:radial-gradient(farthest-side,transparent calc(100% - 6px),#000 calc(100% - 5px))
+}
+#ign-track{width:min(360px,72vw);height:12px;border-radius:99px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.16);overflow:hidden;margin-top:14px;pointer-events:none}
+#ign-fill{height:100%;width:0%;background:linear-gradient(90deg,#ffb347,#ff5f2e);box-shadow:0 0 12px rgba(255,140,60,.7)}
+#ign-txt{margin-top:7px;font-size:9.5px;color:#ffd9b0;letter-spacing:1.5px;font-weight:800;pointer-events:none;opacity:.92}
+
+/* ===================== مرحلة العودة ===================== */
+.ret-hud{position:absolute;top:64px;left:16px;right:16px;z-index:22;display:flex;gap:8px;justify-content:center;pointer-events:none}
+.course-wrap{position:absolute;left:50%;bottom:110px;transform:translateX(-50%);z-index:30;display:flex;flex-direction:column;align-items:center;gap:8px;width:min(430px,88vw)}
+.course-bar{position:relative;width:100%;height:46px;border-radius:14px;border:1px solid rgba(120,200,250,.4);background:rgba(4,10,18,.82);overflow:hidden}
+.course-zone{position:absolute;top:0;bottom:0;background:rgba(69,224,138,.28);border-inline:1px solid rgba(69,224,138,.7)}
+.course-needle{position:absolute;top:-6px;bottom:-6px;width:4px;background:#4dd9ff;box-shadow:0 0 12px rgba(77,217,255,.9)}
+#course-lock{pointer-events:auto}
+.chute-btn{position:absolute;left:50%;bottom:12%;transform:translateX(-50%);z-index:30;pointer-events:auto;cursor:pointer;
+  height:150px;width:150px;border-radius:50%;border:2px solid rgba(255,255,120,.6);
+  background:radial-gradient(circle at 50% 35%,#ffe98a,#e0a92e 60%,#8a5f10);color:#241500;
+  font-weight:900;font-size:16px;line-height:1.4;box-shadow:0 0 46px rgba(255,220,90,.45),inset 0 -14px 26px rgba(0,0,0,.35)}
+.chute-btn small{display:block;font-size:9px;letter-spacing:1px;opacity:.85}
+.chute-alt{position:absolute;left:16px;bottom:16px;z-index:22;color:#9fdcff;font-size:22px;font-weight:900}
+.ret-ev{position:absolute;inset:0;z-index:50;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8%;background:rgba(2,5,10,.25);pointer-events:auto}
+.ret-card{width:min(460px,92vw);background:linear-gradient(170deg,#101a2c,#0a101d);border:1px solid rgba(140,200,250,.35);border-radius:18px;padding:18px 18px 14px;box-shadow:0 18px 60px rgba(0,0,0,.6)}
+.ret-card h4{margin:0 0 4px;font-size:15px;color:#ffe1a8;font-weight:900}
+.ret-card p{margin:0 0 12px;font-size:12px;line-height:1.75;color:#bccce0}
+.ret-choices{display:flex;flex-direction:column;gap:8px}
+.ret-choice{cursor:pointer;text-align:start;border:1px solid rgba(120,190,240,.28);background:rgba(30,60,90,.22);color:#d9ecff;border-radius:12px;padding:9px 12px;font-family:inherit;font-size:12px;line-height:1.6}
+.ret-choice:hover{background:rgba(50,110,160,.35);border-color:rgba(77,217,255,.6)}
+
+@media(max-width:760px){
+  .quest-panel{top:58px;inset-inline-start:10px;width:min(196px,52vw)}
+  .quest-panel .quest:not(.current){display:none}
+  .quest-head{padding-bottom:4px}
+  #ign-hold{width:116px;height:116px;font-size:16px;letter-spacing:6px}
+  .course-wrap{bottom:150px}
+}
+
+
+/* أزرار اللمس للدخول الجوي */
+.entry-pad{
+  position:absolute;bottom:150px;z-index:28;width:66px;height:66px;border-radius:50%;
+  display:none;place-items:center;border:1px solid rgba(120,200,250,.4);
+  background:rgba(8,18,30,.78);color:#9fdcff;font-size:20px;backdrop-filter:blur(6px);
+  touch-action:none;-webkit-user-select:none;user-select:none
+}
+.entry-pad.entry-left{inset-inline-start:18px}
+.entry-pad.entry-right{inset-inline-end:18px}
+.entry-pad.on{display:grid}
+.entry-pad:active{background:rgba(40,110,160,.85)}
+
+/* بطاقة مورد تحت 25% — نبض تحذير */
+.card.low{border-color:rgba(255,95,109,.6)!important;animation:lowPulse 1.15s ease-in-out infinite}
+@keyframes lowPulse{0%,100%{box-shadow:0 0 0 0 rgba(255,95,109,0)}50%{box-shadow:0 0 20px 2px rgba(255,95,109,.4)}}
+
+/* ── إتاحة الوصول: حلقة تركيز واضحة للوحة المفاتيح ── */
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@keyframes mcIn {
+  from { opacity: 0; transform: translateY(-12px) scale(.97); }
+  to   { opacity: 1; transform: none; }
+}
+#mc-card.mc-in { animation: mcIn .32s cubic-bezier(.2,1.4,.4,1) both; }
+
+@keyframes aurPulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(190,150,255,.35), inset 0 0 12px rgba(190,150,255,.12); }
+  50%      { box-shadow: 0 0 34px rgba(200,160,255,.62), inset 0 0 18px rgba(200,160,255,.22); }
+}
+
+/* ===================== القائمة الرئيسية (intro) ===================== */
+.menu-cta{
+  font-size:16px !important;letter-spacing:.6px !important;padding:16px 20px !important;
+  border-radius:14px !important;position:relative;overflow:hidden
+}
+.menu-cta::after{
+  content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent);
+  transform:skewX(-18deg);animation:ctaSheen 3.4s ease-in-out infinite;pointer-events:none
+}
+@keyframes ctaSheen{0%,60%{left:-80%}100%{left:135%}}
+.menu-btn{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:3px;padding:10px 6px !important;font-size:12px !important;line-height:1.35;text-align:center
+}
+.menu-btn small{font-size:7px;letter-spacing:2.2px;color:var(--dim2);font-weight:800}
+.menu-btn:hover small{color:#bfe9ff}
+
+/* ===================== الإنجازات ===================== */
+.ach-row{
+  display:flex;gap:12px;align-items:center;padding:11px 13px;border-radius:14px;
+  border:1px solid rgba(120,228,255,.22);background:linear-gradient(160deg,rgba(20,40,60,.35),rgba(8,14,24,.35))
+}
+.ach-row .ach-ic{font-size:26px;filter:drop-shadow(0 0 8px rgba(255,210,120,.5))}
+.ach-row .ach-t{font-size:12.5px;font-weight:900;color:#ffe9b8}
+.ach-row .ach-d{font-size:10px;color:var(--dim);margin-top:2px;line-height:1.6}
+.ach-row.locked{opacity:.45;filter:grayscale(1)}
+.ach-row.locked .ach-ic{filter:none}
+.ach-row.locked .ach-t{color:var(--dim)}
+.ach-row .ach-state{margin-inline-start:auto;font-size:9px;letter-spacing:1.6px;font-weight:800;color:#45e08a;white-space:nowrap}
+.ach-row.locked .ach-state{color:var(--dim2)}
+
+/* ===================== حجم الخط ===================== */
+body.text-plus{zoom:1.12}
+
+/* ===================== ترقية المركبة ===================== */
+.upg-row{
+  display:flex;gap:12px;align-items:center;padding:11px 13px;border-radius:14px;
+  border:1px solid rgba(120,228,255,.22);background:linear-gradient(160deg,rgba(20,40,60,.35),rgba(8,14,24,.35));
+}
+.upg-row .ach-ic{font-size:26px;filter:drop-shadow(0 0 8px rgba(120,220,255,.4))}
+.upg-row .ach-t{font-size:12.5px;font-weight:900;color:#bfe9ff}
+.upg-body{flex:1;min-width:0}
+.upg-pips{display:flex;gap:5px;margin-top:6px}
+.upg-pip{width:22px;height:6px;border-radius:99px;background:rgba(255,255,255,.12);border:1px solid rgba(140,220,255,.25)}
+.upg-pip.on{background:linear-gradient(90deg,#35e0ff,#7af0c0);border-color:transparent;box-shadow:0 0 8px rgba(80,225,255,.5)}
+.upg-buy{white-space:nowrap}
+.upg-buy:disabled{opacity:.55;cursor:not-allowed}
+
+/* ====== ZATHURA SHELL — chrome موحّد مع البوابة (نفس الشكل والأيقونات) ====== */
+.hub-back{display:inline-flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;
+  border:1px solid rgba(77,217,255,.4);background:rgba(10,16,26,.82);color:#8fe4ff;
+  border-radius:12px;padding:8px 14px;font-size:12px;font-weight:800;letter-spacing:.3px;
+  box-shadow:0 6px 18px rgba(0,0,0,.4);transition:border-color .16s,background .16s,color .16s,box-shadow .16s;
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.hub-back:hover{border-color:var(--cyan);background:rgba(77,217,255,.12);color:#dff6ff;box-shadow:0 0 18px rgba(77,217,255,.28)}
+.hub-back svg{flex:0 0 auto}
+.hub-back-fixed{position:fixed;top:12px;left:12px;z-index:70}
+.nasa-chip{display:flex;align-items:center;gap:8px;border:1px solid var(--line2);border-radius:999px;padding:6px 14px;text-decoration:none;transition:border-color .2s,box-shadow .2s;white-space:nowrap}
+.nasa-chip:hover{border-color:var(--cyan);box-shadow:0 0 18px rgba(77,217,255,.25)}
+.nasa-chip .plate{width:30px;height:30px;border-radius:50%;background:#0b3d91;display:grid;place-items:center;font-size:9px;font-weight:900;color:#fff;letter-spacing:.5px;border:1px solid rgba(255,255,255,.45);flex:0 0 auto}
+.nasa-chip .lbl{font-size:10.5px;color:#bfe0ff;font-weight:700;letter-spacing:.12em;line-height:1.5}
+.nasa-chip .lbl small{display:block;font-size:8px;color:var(--dim);letter-spacing:.22em}
+@media (max-width:900px){.nasa-chip{display:none}}
+@media (max-width:640px){.hub-back-txt{display:none}.hub-back{padding:8px 10px}}
+@media (max-width:700px){.hud .pill{display:none}}
