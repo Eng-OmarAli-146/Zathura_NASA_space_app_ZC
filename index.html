@@ -1,0 +1,756 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#04060b">
+<title>ZATHURA — مدرّب مهمّات رائد الفضاء | NASA Space Apps Challenge 2026</title>
+
+<meta name="description" content="ZATHURA لعبة محاكاة فضائية تعليمية في المتصفح للأعمار ٧–١٢: تدير قاعدة على المريخ والقمر وعطارد بموارد حقيقية وجرعة إشعاع لا تُرجَع وبيانات NASA الفعلية (DONKI · RAD/MSL · BVAD 2022). بدون تثبيت وبدون إنترنت.">
+<meta name="author" content="ZATHURA Team">
+<meta name="robots" content="index,follow">
+<link rel="canonical" href="https://eng-omarali-146.github.io/Zathura_NASA_space_app_ZC/">
+
+<!-- social -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ZATHURA">
+<meta property="og:title" content="ZATHURA — Junior Astronaut Mission Trainer">
+<meta property="og:description" content="A browser-based space mission trainer built on real NASA data. 6 destinations, 27 scenarios, 18 NASA sources — offline, no install, Arabic-first for ages 7–12.">
+<meta property="og:image" content="assets/shot-storm.jpg">
+<meta property="og:url" content="https://eng-omarali-146.github.io/Zathura_NASA_space_app_ZC/">
+<meta property="og:locale" content="ar_EG">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ZATHURA — Junior Astronaut Mission Trainer">
+<meta name="twitter:description" content="Real NASA data. Real trade-offs. A mission trainer for the next frontier.">
+<meta name="twitter:image" content="assets/shot-storm.jpg">
+
+<link rel="icon" type="image/png" href="assets/favicon-64.png">
+<link rel="apple-touch-icon" href="assets/zathura-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<script>document.documentElement.classList.add("js");</script>
+<link rel="stylesheet" href="assets/site.css">
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"ZATHURA — Junior Astronaut Mission Trainer",
+  "applicationCategory":"EducationalApplication",
+  "applicationSubCategory":"Space mission simulation",
+  "operatingSystem":"Any modern browser (Chrome, Edge, Firefox, Safari)",
+  "inLanguage":["ar","en"],
+  "isAccessibleForFree":true,
+  "license":"https://opensource.org/licenses/MIT",
+  "url":"https://eng-omarali-146.github.io/Zathura_NASA_space_app_ZC/",
+  "codeRepository":"https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC",
+  "description":"A browser-based space base management trainer for ages 7–12, built on published NASA life-support, radiation and space-weather data. Runs fully offline.",
+  "audience":{"@type":"EducationalAudience","educationalRole":"student","audienceType":"Ages 7–12"},
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
+}
+</script>
+</head>
+<body id="top">
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<a class="skip" href="#main">تخطَّ إلى المحتوى</a>
+
+<!-- ══════════════════════════════ NAV ══════════════════════════════ -->
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top" aria-label="ZATHURA">
+      <img src="assets/zathura-icon.png" alt="" width="32" height="32">
+      <span>ZATHURA</span>
+    </a>
+
+    <nav class="nav-links" aria-label="أقسام الصفحة">
+      <a href="#idea" data-en="The idea">الفكرة</a>
+      <a href="#mechanics" data-en="Mechanics">الميكانيكا</a>
+      <a href="#isru" data-en="ISRU">الموارد المحلية</a>
+      <a href="#destinations" data-en="Destinations">الوجهات</a>
+      <a href="#science" data-en="The science">العلم</a>
+      <a href="#run" data-en="Run it">التشغيل</a>
+    </nav>
+
+    <div class="nav-tools">
+      <div class="lang" role="group" aria-label="Language / اللغة">
+        <button type="button" data-lang="ar" aria-pressed="true" lang="ar">ع</button>
+        <button type="button" data-lang="en" aria-pressed="false" lang="en">EN</button>
+      </div>
+      <a class="icon-link" href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC"
+         aria-label="GitHub repository" target="_blank" rel="noopener">
+        <svg width="17" height="17" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+        </svg>
+      </a>
+      <a class="btn sm" href="play.html" data-en="▶ Play">▶ العب</a>
+    </div>
+
+    <div class="progress" id="progress" aria-hidden="true"></div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ══════════════════════════════ HERO ══════════════════════════════ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+
+      <div class="hero-copy">
+        <span class="status-pill">
+          <span class="dot" aria-hidden="true"></span>
+          NASA Space Apps Challenge · 2026
+        </span>
+
+        <h1 class="wordmark">ZATHURA</h1>
+        <p class="hero-sub" data-en="Junior Astronaut Mission Trainer">مدرّب مهمّات رائد الفضاء</p>
+
+        <p class="hero-line" data-en="A browser space-simulation game for ages 7–12. You run a base on Mars, the Moon, Mercury, Venus, Saturn or Zewail — with real resource budgets, a radiation dose that never resets, and actual NASA data behind the numbers. No install. No internet.">
+          لعبة محاكاة فضائية تعليمية في المتصفح، للأعمار <b class="hl">٧–١٢</b>.
+          تدير قاعدة على المريخ والقمر وعطارد والزهرة وزحل وكوكب زويل —
+          بموازنات موارد حقيقية، و<b class="hl-c">جرعة إشعاع لا تُرجَع</b>،
+          وبيانات NASA الفعلية وراء كل رقم. بدون تثبيت، وبدون إنترنت.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn" href="play.html" data-en="🚀 Play now">🚀 العب الآن</a>
+          <a class="btn ghost" href="#mechanics" data-en="How it works">كيف تلعب</a>
+          <a class="btn ghost" href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC"
+             target="_blank" rel="noopener" dir="ltr">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
+
+        <div class="hero-badges">
+          <span data-en="No install">بدون تثبيت</span>
+          <span data-en="Works offline">يعمل أوفلاين</span>
+          <span data-en="Keyboard + touch">لوحة مفاتيح + لمس</span>
+          <span data-en="Arabic first">عربي أولًا</span>
+        </div>
+      </div>
+
+      <div class="hero-art">
+        <div class="frame">
+          <img src="assets/shot-storm.jpg" width="1400" height="840"
+               alt="لقطة من داخل اللعبة: تحذير عاصفة شمسية من DONKI على سطح المريخ مع شريط موارد حيّ"
+               fetchpriority="high" decoding="async">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <span class="chip a" dir="ltr"><b>DONKI</b> · SEP ×14</span>
+        <span class="chip b warn" dir="ltr"><b>29</b> / 600 mSv</span>
+      </div>
+
+    </div>
+
+    <!-- stats -->
+    <div class="stats">
+      <div class="stat reveal"><b>6</b><span data-en="Destinations">وجهات</span></div>
+      <div class="stat reveal"><b>27</b><span data-en="Scenarios">سيناريو</span></div>
+      <div class="stat reveal"><b>18</b><span data-en="NASA sources">مصدر NASA</span></div>
+      <div class="stat reveal"><b>0</b><span data-en="Installs required">تثبيت مطلوب</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ IDEA ══════════════════════════════ -->
+<section id="idea">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="The idea">الفكرة</p>
+      <h2 data-en="One resource you can never earn back: time.">مورد واحد لا يمكن تعويضه: <span class="hl-a">الوقت</span>.</h2>
+      <p class="lead" data-en="Every other space game gives the child more oxygen when they fail. ZATHURA doesn’t. A Sol is 24 crew-hours. Digging a sample costs 8. Analysing it costs 4. Cleaning the solar panels costs 4. You cannot do everything — and that is the lesson: space exploration is a sequence of deliberate trade-offs, not a power fantasy.">
+        كل ألعاب الفضاء تعطي الطفل أكسجينًا إضافيًا حين يفشل. ZATHURA لا تفعل.
+        الـSol = <b class="hl">٢٤ ساعة طاقم</b>. حفر عينة <b class="hl">٨ ساعات</b>، تحليلها <b class="hl">٤</b>،
+        تنظيف الألواح <b class="hl">٤</b>. لا يمكنك فعل كل شيء — وهذه هي الرسالة:
+        استكشاف الفضاء سلسلة مقايضات مدروسة، لا وهم قدرة مطلقة.
+      </p>
+    </div>
+
+    <div class="flow" role="list" aria-label="مسار اللعبة">
+      <div class="step reveal" role="listitem"><i>01</i><b data-en="Launch pad">منصّة الإطلاق</b><small>INTRO</small></div>
+      <div class="step reveal" role="listitem"><i>02</i><b data-en="Mission control">مركز التحكّم</b><small>HQ</small></div>
+      <div class="step reveal" role="listitem"><i>03</i><b data-en="Destination">اختيار الوجهة</b><small>DESTINATIONS</small></div>
+      <div class="step reveal" role="listitem"><i>04</i><b data-en="Vehicle check">فحص المركبة</b><small>CRAFT</small></div>
+      <div class="step reveal" role="listitem"><i>05</i><b data-en="Prep walk-through">التحضير بالمشي</b><small>BOARDING</small></div>
+      <div class="step reveal" role="listitem"><i>06</i><b data-en="Hold-to-ignite">الإشعال بالضغط المطوّل</b><small>LAUNCH</small></div>
+      <div class="step reveal" role="listitem"><i>07</i><b data-en="Base survival">العيش في القاعدة</b><small>OUTPOST</small></div>
+      <div class="step reveal" role="listitem"><i>08</i><b data-en="Flight home">رحلة العودة</b><small>RETURN</small></div>
+      <div class="step reveal" role="listitem"><i>09</i><b data-en="Debrief">التقرير والدرس</b><small>RESULT</small></div>
+    </div>
+    <p class="muted" style="font-size:12.5px;margin-top:14px" data-en="Nine screens, one continuous timeline. Nothing is a menu-only choice: you walk the base, stand on a sample site and hold a key.">
+      تسع شاشات على خط زمني واحد. لا شيء «اختيار من قائمة» فقط: تمشي في القاعدة، تقف على موقع العينة، وتضغط مطوّلًا.
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ MECHANICS ══════════════════════════════ -->
+<section id="mechanics">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Mechanics">الميكانيكا</p>
+      <h2 data-en="Every decision has a price tag.">كل قرار له <span class="hl-c">ثمن</span> — ومكتوب.</h2>
+      <p class="lead" data-en="Six systems that fight each other, all running in real time while the child plays. After every event the game explains why it happened — not just what it cost.">
+        ستة أنظمة تتصارع، وكلها تعمل في الزمن الحقيقي أثناء اللعب.
+        وبعد كل حدث تشرح اللعبة <b class="hl">لماذا</b> حدث، لا فقط كم كلّف.
+      </p>
+    </div>
+
+    <div class="grid g3">
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">⏱️</div>
+        <h3 data-en="Crew time is the currency">ساعات الطاقم هي العملة</h3>
+        <p data-en="A Sol is 24 hours for everything: digging, analysis, repairs, irrigation, sleep. The clock does not wait for the player.">
+          الـSol ٢٤ ساعة لكل شيء: حفر، تحليل، إصلاح، ريّ، نوم.
+          الساعة لا تنتظر اللاعب — المهمة تتوالى تلقائيًا بمجرد بدء اليوم.
+        </p>
+        <span class="tagline">CAPACITY</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">⚡</div>
+        <h3 data-en="Five systems, one power budget">خمسة أنظمة، ميزانية طاقة واحدة</h3>
+        <p data-en="Life support, greenhouse, lab, shields and heating compete for the same production. Demand above production means systems drop out and consume more.">
+          الحياة، الدفيئة، المعمل، الدروع، والتدفئة تتزاحم على نفس الإنتاج.
+          الطلب &gt; الإنتاج ⇒ أنظمة تفصل وتستهلك أكتر.
+        </p>
+        <span class="tagline">POWER</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">☀️</div>
+        <h3 data-en="Day / night is the hardest call">الليل والنهار: أصعب قرار في اليوم</h3>
+        <p data-en="Solar output drops to zero at night. A 14 kW RTG covers only the minimum. Any deficit pushes O₂ ×1.5 and water ×1.4 until dawn.">
+          الألواح الشمسية صفر ليلًا، ومفاعل RTG بقدرة ١٤ kW يغطي الحد الأدنى فقط.
+          أي عجز ⇒ O₂ ×1.5 وماء ×1.4 حتى الفجر.
+        </p>
+        <span class="tagline">SOL CYCLE</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">☢️</div>
+        <h3 data-en="Radiation dose never resets">الجرعة لا تُرجَع أبدًا</h3>
+        <p data-en="A 600 mSv career ceiling. Shelter cuts dose by 85%, active shielding by 38%, and every EVA adds an immediate hit.">
+          سقف مهني ٦٠٠ mSv. الملجأ يقلّل الجرعة ٨٥٪، الدروع النشطة ٣٨٪،
+          وكل خروج EVA يضيف جرعة فورية. الوصول للسقف = إلغاء المهمة.
+        </p>
+        <span class="tagline">RADIATION</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">🧪</div>
+        <h3 data-en="ISRU: make, don’t just save">استغلال الموارد المحلية: لا توفير فقط</h3>
+        <p data-en="Melt ice into water and oxygen. Sinter regolith into local shielding. Every kilogram manufactured on-site is a kilogram not shipped from Earth.">
+          ثلج ← ماء وأكسجين. ريجوليث ← درع محلي.
+          كل كيلوجرام تُصنّعه في الموقع هو كيلوجرام لم يُشحن من الأرض.
+        </p>
+        <span class="tagline">IN-SITU</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">🛰️</div>
+        <h3 data-en="An adaptive event engine">محرّك أحداث يتكيّف معك</h3>
+        <p data-en="27 scenarios across 15 scene types, weighted by your own past decisions. Repeat bad calls raise the odds of radiation scenarios — and nothing repeats back to back.">
+          ٢٧ سيناريو على ١٥ نوع مشهد، موزونة على قراراتك السابقة.
+          تكرار الخطأ يرفع احتمال سيناريوهات الإشعاع، ولا يُعاد نفس الحدث مرتين وراء بعض.
+        </p>
+        <span class="tagline">ADAPTIVE</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ ISRU ══════════════════════════════ -->
+<section id="isru">
+  <div class="wrap">
+    <div class="spec-two">
+      <div class="sec-head" style="margin-bottom:0">
+        <p class="eyebrow" data-en="ISRU · challenge objective">الهدف الأساسي للتحدّي</p>
+        <h2 data-en="Survive on what you find there.">تُعيش من <span class="hl-c">اللي تلاقيه هناك</span>.</h2>
+        <p class="lead" data-en="The core scientific objective of in-situ resource utilisation is not “collect points”. It is to stop depending on Earth. DSN resupply exists in the game — and is scored against you. Skipping it is the mark of mastery.">
+          الهدف العلمي من استغلال الموارد المحلية ليس «جمع نقاط»، بل التوقف عن الاعتماد على الأرض.
+          إمداد DSN الأرضي موجود في اللعبة — ويُحسب <b class="hl-a">ضدك</b>. الاستغناء عنه علامة الإتقان.
+        </p>
+
+        <div class="chips">
+          <span data-en="dig ice">حفر جليد</span>
+          <span data-en="electrolysis">تحليل كهربائي</span>
+          <span data-en="regolith sintering">صهر ريجوليث</span>
+          <span data-en="MOXIE">MOXIE</span>
+        </div>
+      </div>
+
+      <div class="pipe reveal" dir="rtl">
+        <div class="pipe-row">
+          <span class="node in">❄️ <span data-en="2 ice">٢ ثلج</span></span>
+          <span class="arrow">→</span>
+          <span class="node out" data-en="+4 water · +6 O₂">+٤ ماء · +٦ أوكسجين</span>
+          <span class="why" data-en="Electrolysis at MOXIE">تحليل كهربائي عند MOXIE</span>
+        </div>
+        <div class="pipe-row">
+          <span class="node in">🧱 <span data-en="2 regolith">٢ ريجوليث</span></span>
+          <span class="arrow">→</span>
+          <span class="node out" data-en="+10% local shield">+١٠٪ درع محلي</span>
+          <span class="why" data-en="Up to −40% dose">حتى ‎−٤٠٪ جرعة</span>
+        </div>
+        <div class="pipe-row">
+          <span class="node in">💨 <span data-en="CO₂ + power">CO₂ + طاقة</span></span>
+          <span class="arrow">→</span>
+          <span class="node out" data-en="+8 O₂">+٨ أوكسجين</span>
+          <span class="why" data-en="MOXIE, 3 h manual run">MOXIE · تشغيل يدوي ٣ س</span>
+        </div>
+        <div class="pipe-row">
+          <span class="node in">⛏ <span data-en="1 sample">١ عينة</span></span>
+          <span class="arrow">→</span>
+          <span class="node out" data-en="+1 soil · +2 science">+١ تربة · +٢ علم</span>
+          <span class="why" data-en="Lab analysis, 4 h">تحليل في المعمل · ٤ س</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g3" style="margin-top:clamp(16px,2.2vw,22px)">
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">🧊</div>
+        <h3 data-en="Ice is hidden until its mission">الجليد مخفي حتى تأتي مهمته</h3>
+        <p data-en="Ice sites are spread across the entire world map, and only appear when the resource mission unlocks. Venus has none — its surface is impossible.">
+          مواقع الجليد منتشرة على عرض العالم كله، ولا تظهر إلا مع مهمة «الموارد المحلية».
+          الزهرة صفر جليد — سطحها مستحيل.
+        </p>
+      </article>
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">📊</div>
+        <h3 data-en="Six ISRU quests before launch">ست مهام ISRU قبل الإقلاع</h3>
+        <p data-en="Playing safe is not enough: the mission list demands ice, electrolysis, sintering and MOXIE before the launch button unlocks.">
+          اللعب «الآمن» لا يكفي: قائمة المهام تطلب جليدًا وتحليلًا وصهرًا وMOXIE
+          قبل أن يُفتح زر الإقلاع.
+        </p>
+      </article>
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">📦</div>
+        <h3 data-en="Reported as kilograms not shipped">يُقاس بالكيلوجرامات التي لم تُشحن</h3>
+        <p data-en="The debrief card shows extracted ice units, analyses, sintered blocks and an estimate of material mass never shipped from Earth.">
+          كارت النتيجة يعرض وحدات الثلج المستخرجة، التحاليل، الكتل المصهورة،
+          وتقدير كجم المواد التي لم تُشحن من الأرض.
+        </p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ DESTINATIONS ══════════════════════════════ -->
+<section id="destinations">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Six destinations">ست وجهات</p>
+      <h2 data-en="Real worlds. Honest constraints.">عوالم حقيقية. <span class="hl-c">قيود صادقة</span>.</h2>
+      <p class="lead" data-en="Each destination carries its own physics: a 14-day lunar night, Venus’s impossible surface, Saturn’s orbital station and isolation. Vehicles are fictional — the heritage and the numbers are not.">
+        كل وجهة بفيزيائها: ليل قمري ١٤ يومًا، سطح الزهرة المستحيل، محطة زحل المدارية والعزلة.
+        المركبات خيالية — أما المرجع التاريخي والأرقام فليست كذلك.
+      </p>
+    </div>
+
+    <div class="grid g3">
+      <article class="dest reveal" style="--pc:#b9c6d4">
+        <div class="planet" aria-hidden="true"></div>
+        <div class="dest-top"><h3 data-en="The Moon">القمر</h3><span class="idx">01</span></div>
+        <div class="veh">Eagle II</div>
+        <p data-en="A 14-day night with no solar input, radiation, and abrasive dust that eats seals.">ليل ١٤ يومًا بلا أي إنتاج شمسي، إشعاع، وغبار حاد يأكل الحشوات.</p>
+        <div class="heritage"><span data-en="Heritage:">المرجع:</span> <b>Apollo 11 / LM Eagle</b></div>
+      </article>
+
+      <article class="dest reveal" style="--pc:#d1603d">
+        <div class="planet" aria-hidden="true"></div>
+        <div class="dest-top"><h3 data-en="Mars">المريخ</h3><span class="idx">02</span></div>
+        <div class="veh">Ares VII</div>
+        <p data-en="Dust storms, a thin atmosphere, and a signal delay that turns every emergency into a solo decision.">عواصف ترابية، ضغط منخفض، وتأخير اتصال يحوّل كل طارئ إلى قرار وحيد.</p>
+        <div class="heritage"><span data-en="Heritage:">المرجع:</span> <b>Mars 2020 / Perseverance</b></div>
+      </article>
+
+      <article class="dest reveal" style="--pc:#a2918a">
+        <div class="planet" aria-hidden="true"></div>
+        <div class="dest-top"><h3 data-en="Mercury">عطارد</h3><span class="idx">03</span></div>
+        <div class="veh">Hermes II</div>
+        <p data-en="A 600°C thermal swing and relentless solar radiation. The Sun is both fuel and threat.">فرق حراري ٦٠٠°، وإشعاع شمسي لا يهدأ. الشمس وقود وتهديد في الوقت نفسه.</p>
+        <div class="heritage"><span data-en="Heritage:">المرجع:</span> <b>MESSENGER</b></div>
+      </article>
+
+      <article class="dest reveal" style="--pc:#e3b25c">
+        <div class="planet" aria-hidden="true"></div>
+        <div class="dest-top"><h3 data-en="Venus">الزهرة</h3><span class="idx">04</span></div>
+        <div class="veh">Aerostat V</div>
+        <p data-en="No surface base exists. You live on a floating platform 50 km up — the only survivable altitude.">لا قاعدة سطحية أصلًا. تعيش على منصّة عائمة بارتفاع ٥٠ كم — الارتفاع الوحيد القابل للنجاة.</p>
+        <div class="heritage"><span data-en="Heritage:">المرجع:</span> <b>Magellan</b></div>
+      </article>
+
+      <article class="dest reveal" style="--pc:#d9c27a">
+        <div class="planet ring" aria-hidden="true"></div>
+        <div class="dest-top"><h3 data-en="Saturn">زحل</h3><span class="idx">05</span></div>
+        <div class="veh">Cassini II</div>
+        <p data-en="An orbital station with Titan excursions, ring debris and the hardest resource of all: company.">محطة مدارية مع رحلات تايتان، حطام الحلقات، وأصعب مورد: الرفقة.</p>
+        <div class="heritage"><span data-en="Heritage:">المرجع:</span> <b>Cassini–Huygens</b></div>
+      </article>
+
+      <article class="dest reveal" style="--pc:#7fd8ef">
+        <div class="planet" aria-hidden="true"></div>
+        <div class="dest-top"><h3 data-en="Planet Zewail">كوكب زويل</h3><span class="idx">06</span></div>
+        <div class="veh">Zewail II</div>
+        <p data-en="A fictional world: sub-surface salty ice and −148°C nights. Named for Ahmed Zewail, Nobel 1999.">عالم خيالي: جليد مالح شبه-سطحي وبرد ليلي ‎−١٤٨°. تكريمًا لأحمد زويل (نوبل ١٩٩٩).</p>
+        <div class="heritage"><span data-en="Heritage:">المرجع:</span> <b>SHARAD / SOFIA ice analogues</b></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ SCIENCE ══════════════════════════════ -->
+<section id="science">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Validity">العلم</p>
+      <h2 data-en="Numbers with receipts.">أرقام <span class="hl-c">بمصادرها</span>.</h2>
+      <p class="lead" data-en="Every constant is either a published NASA figure or an explicit game estimate — and the game labels which is which, in the HUD and in the debrief.">
+        كل ثابت في اللعبة إما رقم NASA منشور أو تقدير لعبة مكتوب صراحةً —
+        واللعبة تُصنّف أيهما، في الـHUD وفي تقرير النتيجة.
+      </p>
+    </div>
+
+    <div class="sci-grid">
+      <div class="panel reveal">
+        <div class="panel-head">
+          <span data-en="Life support &amp; radiation constants">ثوابت دعم الحياة والإشعاع</span>
+          <b>SIM CONSTANTS</b>
+        </div>
+        <div class="tbl">
+        <table class="sci">
+          <thead>
+            <tr>
+              <th data-en="Quantity">الكمية</th>
+              <th data-en="Value">القيمة</th>
+              <th data-en="Type">النوع</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-en="Oxygen per crew, per day">أكسجين للرائد يوميًا</td>
+              <td class="v">0.84 kg</td>
+              <td><span class="badge nasa">NASA</span></td>
+            </tr>
+            <tr>
+              <td data-en="Dry food per crew, per day">غذاء جاف للرائد يوميًا</td>
+              <td class="v">1.56 kg</td>
+              <td><span class="badge nasa">BVAD 2022</span></td>
+            </tr>
+            <tr>
+              <td data-en="Drinking water per crew, per day">ماء شرب للرائد يوميًا</td>
+              <td class="v">3.20 kg</td>
+              <td><span class="badge nasa">BVAD 2022</span></td>
+            </tr>
+            <tr>
+              <td data-en="Water recovery rate">نسبة استرجاع الماء</td>
+              <td class="v">90% → 98%</td>
+              <td><span class="badge nasa">NASA</span></td>
+            </tr>
+            <tr>
+              <td data-en="Career dose ceiling">سقف الجرعة المهنية</td>
+              <td class="v">600 mSv</td>
+              <td><span class="badge nasa">NASA STD-3001</span></td>
+            </tr>
+            <tr>
+              <td data-en="Mars surface dose rate">معدل الجرعة على سطح المريخ</td>
+              <td class="v">0.64 mSv/day</td>
+              <td><span class="badge nasa">RAD / MSL</span></td>
+            </tr>
+            <tr>
+              <td data-en="Deep-space transit dose rate">معدل الجرعة أثناء العبور</td>
+              <td class="v">1.84 mSv/day</td>
+              <td><span class="badge nasa">RAD / MSL</span></td>
+            </tr>
+            <tr>
+              <td data-en="Shelter dose reduction">تخفيض الجرعة في الملجأ</td>
+              <td class="v">−85%</td>
+              <td><span class="badge est" data-en="Game estimate">تقدير اللعبة</span></td>
+            </tr>
+            <tr>
+              <td data-en="Active shielding reduction">تخفيض الدروع النشطة</td>
+              <td class="v">−38%</td>
+              <td><span class="badge est" data-en="Game estimate">تقدير اللعبة</span></td>
+            </tr>
+            <tr>
+              <td data-en="Daytime solar ceiling">سقف طاقة الألواح نهارًا</td>
+              <td class="v">~38 kW</td>
+              <td><span class="badge est" data-en="Game estimate">تقدير اللعبة</span></td>
+            </tr>
+          </tbody>
+        </table>
+        </div>
+      </div>
+
+      <div style="display:grid;gap:clamp(14px,2vw,22px)">
+        <div class="panel storm reveal">
+          <div class="storm-top">
+            <div>
+              <div style="font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--dim-2)">DONKI · MAY 2024</div>
+              <div style="font-size:15px;font-weight:600;margin-top:6px" data-en="Strongest storm in 25 years">أقوى عاصفة في ٢٥ سنة</div>
+              <div style="font-size:12px;color:var(--dim-2);margin-top:4px" data-en="Loaded as real reference data, not live telemetry.">محفوظة كمرجع حقيقي، لا كقياس حيّ.</div>
+            </div>
+            <div class="kp"><b>9.0</b><small>Kp</small></div>
+          </div>
+
+          <div class="bars" data-bars>
+            <div class="bar-row"><span class="lbl">CME</span><span class="bar-track"><span class="bar-fill" data-w="63"></span></span><span class="num">85</span></div>
+            <div class="bar-row"><span class="lbl">FLR</span><span class="bar-track"><span class="bar-fill" data-w="100"></span></span><span class="num">135</span></div>
+            <div class="bar-row"><span class="lbl">GST</span><span class="bar-track"><span class="bar-fill" data-w="3"></span></span><span class="num">4</span></div>
+            <div class="bar-row hot"><span class="lbl">SEP</span><span class="bar-track"><span class="bar-fill" data-w="10"></span></span><span class="num">14</span></div>
+          </div>
+
+          <div class="note">
+            <b data-en="Why SEP matters:">ليه SEP هو المهم:</b>
+            <span data-en="solar energetic particles are what actually irradiate astronauts — not flares. In May 2024 the first SEP (2024-05-09T13:59Z) arrived 24 h before the geomagnetic storm.">
+              الجزيئات الشمسية عالية الطاقة هي ما يضرب الروّاد فعلًا، لا التوهجات.
+              في مايو ٢٠٢٤ وصل أول حدث SEP (2024-05-09T13:59Z) قبل العاصفة المغناطيسية الأرضية بـ٢٤ ساعة.
+            </span>
+          </div>
+        </div>
+
+        <div class="note reveal" style="margin-top:0">
+          <b data-en="Scientific honesty:">الأمانة العلمية:</b>
+          <span data-en="The figures shown are an educational simulation built on published values, not live measurements. RadLab’s unit is not publicly documented, and DONKI sources are prototyping quality — not official forecasts (the operational reference is NOAA SWPC).">
+            الأرقام المعروضة محاكاة تعليمية مبنية على قيم منشورة، وليست قياسات حيّة.
+            وحدة RadLab غير موثّقة علنًا، ومصادر DONKI بجودة «prototyping» وليست تنبؤات رسمية
+            (المرجع التشغيلي هو NOAA SWPC).
+          </span>
+        </div>
+
+        <div class="chips" style="margin-top:0">
+          <span>DONKI</span><span>RadLab</span><span>OSDR</span><span>BVAD 2022</span><span>Mars Trek</span><span>NASA Open APIs</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ SHOTS ══════════════════════════════ -->
+<section id="shots">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="From the build">من داخل اللعبة</p>
+      <h2 data-en="Playable, not a mock-up.">قابلة للعب، لا <span class="hl-c">نموذج تصميم</span>.</h2>
+      <p class="lead" data-en="Both frames are captured from the actual build in this repository — no renders, no concept art.">
+        اللقطتان مأخوذتان من النسخة الفعلية في هذا المستودع — لا رسوم تخيّلية ولا «كونسبت».
+      </p>
+    </div>
+
+    <div class="shots">
+      <figure class="shot reveal">
+        <div class="frame">
+          <img src="assets/shot-storm.jpg" width="1400" height="840" loading="lazy" decoding="async"
+               alt="عاصفة شمسية أثناء اللعب: تحذير DONKI، عدّ تنازلي، وشريط موارد حيّ">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <figcaption data-en="A solar storm mid-run: DONKI warning, 24-hour countdown, live resource HUD.">
+          عاصفة شمسية أثناء اللعب: تحذير DONKI، عدّ تنازلي ٢٤، وشريط موارد حيّ.
+        </figcaption>
+      </figure>
+
+      <figure class="shot reveal">
+        <div class="frame">
+          <img src="assets/shot-end.jpg" width="1400" height="840" loading="lazy" decoding="async"
+               alt="تقرير نهاية المهمة: عينة واحدة من ست، جرعة تراكمية، وحكم مدير الموارد">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <figcaption data-en="The debrief: 1 of 6 samples, 33 of 600 mSv, and a plain-language verdict.">
+          التقرير: عينة واحدة من ٦، جرعة ٣٣ من ٦٠٠ mSv، وحكم واضح باللغة العادية.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ RUN ══════════════════════════════ -->
+<section id="run">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Run it">التشغيل</p>
+      <h2 data-en="No install. No build step. No network.">بدون تثبيت. بدون بناء. <span class="hl-c">بدون شبكة</span>.</h2>
+      <p class="lead" data-en="Everything compiles into one self-contained HTML file. Canvas 2D for all graphics, Web Audio API for every sound — generated at runtime, no audio assets.">
+        كل شيء يُجمَّع في ملف HTML واحد مكتفٍ بذاته.
+        كل الرسوم على Canvas 2D، وكل الأصوات مُولَّدة بـWeb Audio API — بدون أي ملفات صوت.
+      </p>
+    </div>
+
+    <div class="run-grid">
+      <div class="run reveal">
+        <span class="k">FASTEST</span>
+        <h3 data-en="Open the build">افتح النسخة الجاهزة</h3>
+        <p data-en="Double-click the built file in any modern browser. Nothing else needed.">دوس على الملف الجاهز في أي متصفح حديث. مش محتاج أي حاجة تانية.</p>
+        <div class="cmd"><code>play.html</code><button type="button" class="copy" data-copy-text="play.html" aria-label="نسخ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
+      </div>
+
+      <div class="run reveal">
+        <span class="k">DEVELOP</span>
+        <h3 data-en="Rebuild from src/">أعد البناء من src/</h3>
+        <p data-en="build.js concatenates the ten modules and the stylesheet into one file, byte-for-byte reproducible.">
+          build.js يجمع الوحدات العشر وورقة الأنماط في ملف واحد، بإعادة إنتاج مطابقة بايت ببايت.
+        </p>
+        <div class="cmd"><code>node build.js</code><button type="button" class="copy" data-copy-text="node build.js" aria-label="نسخ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
+      </div>
+
+      <div class="run reveal">
+        <span class="k">TEST</span>
+        <h3 data-en="Play it through a server">شغّلها عبر سيرفر</h3>
+        <p data-en="Useful for local QA and for the Playwright end-to-end run.">مفيدة للاختبار المحلي وتشغيل Playwright من طرف إلى طرف.</p>
+        <div class="cmd"><code>python3 -m http.server 8080</code><button type="button" class="copy" data-copy-text="python3 -m http.server 8080" aria-label="نسخ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:clamp(16px,2.2vw,22px);align-items:start">
+      <div class="reveal">
+        <pre class="tree"><span class="d">Zathura_NASA_space_app_ZC/</span>
+├─ <span class="e">index.html</span>          <span class="c"># this project page</span>
+├─ <span class="e">play.html</span>           <span class="c"># built game — 526 KB, self-contained</span>
+├─ src/
+│  ├─ missiondata.js   <span class="c"># 6 missions · 27 scenarios · 18 sources</span>
+│  ├─ core.js          <span class="c"># state · audio · router · modals</span>
+│  ├─ render.js        <span class="c"># planets · stars · astronaut · particles</span>
+│  ├─ quests.js        <span class="c"># “my mission” sequencing engine</span>
+│  ├─ screens_intro.js · screens_hq.js · screens_launch.js
+│  ├─ screens_outpost.js <span class="c"># base world + walking + events</span>
+│  ├─ screens_return.js · screens_result.js
+│  └─ styles.css
+├─ build.js            <span class="c"># src/ → play.html (single file)</span>
+├─ data/donki/         <span class="c"># cached MAY 2024 space-weather events</span>
+├─ assets/             <span class="c"># screenshots · icon · site.css · site.js</span>
+├─ DESIGN.md           <span class="c"># mechanics &amp; balance design notes</span>
+├─ SOURCES-AUDIT.md    <span class="c"># source-by-source verification</span>
+└─ README.md</pre>
+        <div class="chips">
+          <span>Canvas 2D</span><span>Web Audio API</span><span>Vanilla JS</span>
+          <span data-en="zero dependencies">صفر تبعيات</span>
+          <span data-en="single-file build">بناء ملف واحد</span>
+          <span>RTL</span>
+          <span data-en="autosave + resume">حفظ تلقائي + استئناف</span>
+        </div>
+      </div>
+
+      <div class="grid" style="gap:14px">
+        <article class="card reveal">
+          <div class="ico" aria-hidden="true">💾</div>
+          <h3 data-en="Autosave, real resume">حفظ تلقائي واستئناف حقيقي</h3>
+          <p data-en="Progress is stored after every event — mission, resources, samples, ISRU, quests. Close the tab and mission control offers “resume your mission · SOL N”.">
+            التقدم يُحفظ مع كل حدث — المهمة، الموارد، العينات، ISRU، المهام.
+            اقفل الصفحة، ولما ترجع مركز التحكّم يعرض «استئناف مهمتك · SOL N».
+          </p>
+        </article>
+        <article class="card reveal">
+          <div class="ico" aria-hidden="true">♿</div>
+          <h3 data-en="Built for a classroom">مصمّمة لفصل دراسي</h3>
+          <p data-en="Keyboard and touch parity, Arabic-first typography, colour-coded consequences, and a “how to play” card a 7-year-old can follow alone.">
+            لوحة مفاتيح ولمس على قدم المساواة، طباعة عربية أولًا، ألوان تدلّل على العواقب،
+            وكارت «كيف تلعب» يفهمه طفل ٧ سنوات لوحده.
+          </p>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ CTA ══════════════════════════════ -->
+<section style="padding-block-start:0">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <p class="eyebrow" style="justify-content:center" data-en="Ready when you are">جاهز لما تكون جاهز</p>
+      <h2 data-en="Six worlds. One shift. Try not to run out of air.">ستة عوالم. شيفت واحد. <span class="hl-c">حاول متخلصش أوكسجين</span>.</h2>
+      <p data-en="Runs in the browser you already have. Around 300 KB of code, zero network requests, and a mission that takes about 20 minutes.">
+        بتشتغل في المتصفح اللي عندك. حوالي ٣٠٠ كيلوبايت كود، صفر طلبات شبكة،
+        ومهمة واحدة تأخذ حوالي ٢٠ دقيقة.
+      </p>
+      <div class="hero-cta">
+        <a class="btn" href="play.html" data-en="🚀 Launch ZATHURA">🚀 ابدأ مهمتك</a>
+        <a class="btn ghost" href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/README.md" target="_blank" rel="noopener" data-en="Read the README">اقرأ الـREADME</a>
+        <a class="btn ghost" href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/SOURCES-AUDIT.md" target="_blank" rel="noopener" data-en="Sources audit">تدقيق المصادر</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════ FOOTER ══════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand">
+          <img src="assets/zathura-icon.png" alt="" width="30" height="30">
+          <b>ZATHURA</b>
+        </div>
+        <p data-en="An educational space-simulation game for ages 7–12, submitted to the NASA Space Apps Challenge 2026 under the Junior Astronaut Mission Trainer brief.">
+          لعبة محاكاة فضائية تعليمية للأعمار ٧–١٢، مقدَّمة إلى
+          NASA Space Apps Challenge 2026 ضمن تحدّي مدرّب مهمّات رائد الفضاء.
+        </p>
+        <div class="chips">
+          <span>MIT</span><span>2026</span><span data-en="offline">أوفلاين</span>
+        </div>
+      </div>
+
+      <div>
+        <h4 data-en="The project">المشروع</h4>
+        <ul>
+          <li><a href="play.html" data-en="Play the game">العب اللعبة</a></li>
+          <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/README.md" target="_blank" rel="noopener" data-en="README">README</a></li>
+          <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/DESIGN.md" target="_blank" rel="noopener" data-en="Design notes">ملاحظات التصميم</a></li>
+          <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/SOURCES-AUDIT.md" target="_blank" rel="noopener" data-en="Sources audit">تدقيق المصادر</a></li>
+          <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC" target="_blank" rel="noopener">GitHub</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-en="Data sources">مصادر البيانات</h4>
+        <ul>
+          <li><a href="https://ccmc.gsfc.nasa.gov/tools/DONKI/" target="_blank" rel="noopener">DONKI · space weather</a></li>
+          <li><a href="https://visualization.osdr.nasa.gov/radlab/" target="_blank" rel="noopener">RadLab · ISS dose</a></li>
+          <li><a href="https://osdr.nasa.gov/" target="_blank" rel="noopener">OSDR · biology</a></li>
+          <li><a href="https://api.nasa.gov/" target="_blank" rel="noopener">NASA Open APIs</a></li>
+          <li><a href="https://ntrs.nasa.gov/" target="_blank" rel="noopener">BVAD 2022 · NTRS</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 data-en="Event">الحدث</h4>
+        <ul>
+          <li><a href="https://www.spaceappschallenge.org/" target="_blank" rel="noopener">NASA Space Apps Challenge</a></li>
+          <li><a href="https://science.nasa.gov/" target="_blank" rel="noopener">NASA Science</a></li>
+          <li><span class="muted" data-en="Theme 2026 · The Next Frontier">ثيم ٢٠٢٦ · The Next Frontier</span></li>
+          <li><span class="muted" data-en="Nov 14–15, 2026">١٤–١٥ نوفمبر ٢٠٢٦</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="disclaimer">
+      <b data-en="Independent educational project.">مشروع تعليمي مستقل.</b>
+      <span data-en="Not official, not affiliated with or endorsed by NASA. The vehicles in the game are fictional, inspired by historic NASA missions rather than copies of them. Scientific data belongs to NASA and its partners and is attributed inside the game and in the sources panel. Planet Zewail is a fictional destination invented by the team in honour of Ahmed Zewail.">
+        غير رسمي، وغير تابع لوكالة NASA أو ممثل عنها. المركبات في اللعبة خيالية مستوحاة من مهام NASA التاريخية وليست هي نفسها.
+        البيانات العلمية ملك NASA وشركائها، وتُنسب داخل اللعبة وفي لوحة المصادر.
+        «كوكب زويل» وجهة خيالية ابتكرها الفريق تكريمًا لأحمد زويل.
+      </span>
+    </p>
+
+    <div class="foot-bottom">
+      <span>© 2026 ZATHURA TEAM · MIT</span>
+      <span data-en="Made for NASA Space Apps Challenge 2026">صُنع لمشروع NASA Space Apps Challenge 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/site.js" defer></script>
+</body>
+</html>
