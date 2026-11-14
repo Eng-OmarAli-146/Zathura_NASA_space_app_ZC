@@ -14,7 +14,7 @@
 [![No dependencies](https://img.shields.io/badge/dependencies-0-ffb454.svg)](package.json)
 [![NASA Space Apps 2026](https://img.shields.io/badge/NASA%20Space%20Apps-2026-ffffff.svg)](https://www.spaceappschallenge.org/)
 
-[**▶ العب الآن**](play/) · [**صفحة المشروع**](index.html) · [**المرجع العلمي (PDF)**](docs/science-reference-15-scenarios-ar.pdf) · [**تدقيق المصادر**](SOURCES-AUDIT.md) · [**ملاحظات التصميم**](DESIGN.md)
+[**▶ العب الآن**](play/) · [**صفحة المشروع**](index.html) · [**العرض (PPTX)**](docs/ZATHURA-pitch-ar.pptx) · [**المرجع العلمي (PDF)**](docs/science-reference-15-scenarios-ar.pdf) · [**تدقيق المصادر**](SOURCES-AUDIT.md) · [**ملاحظات التصميم**](DESIGN.md)
 
 <sub>العربية ↓ · [English ↓](#-english)</sub>
 
@@ -131,7 +131,7 @@ index.html              →  صفحة المشروع (GitHub Pages)
 assets/                 →  لقطات · أيقونة · site.css · site.js
 data/donki/             →  أرشيف أحداث مايو ٢٠٢٤
 tools/verify-build.js   →  فحص قابلية إعادة البناء
-docs/                   →  المرجع العلمي (15 سيناريو، PDF)
+docs/                   →  المرجع العلمي (PDF) + العرض التقديمي (PPTX) + دليل عربي
 ```
 
 كل شاشة تسجّل نفسها بـ `registerScreen(name, {mount, unmount})` والراوتر ينقل بـ `go(name)`،
