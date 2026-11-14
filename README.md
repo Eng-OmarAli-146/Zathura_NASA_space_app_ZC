@@ -14,7 +14,7 @@
 [![No dependencies](https://img.shields.io/badge/dependencies-0-ffb454.svg)](package.json)
 [![NASA Space Apps 2026](https://img.shields.io/badge/NASA%20Space%20Apps-2026-ffffff.svg)](https://www.spaceappschallenge.org/)
 
-[**▶ العب الآن**](play/) · [**صفحة المشروع**](index.html) · [**العرض (PPTX)**](docs/ZATHURA-pitch-ar.pptx) · [**المرجع العلمي (PDF)**](docs/science-reference-15-scenarios-ar.pdf) · [**تدقيق المصادر**](SOURCES-AUDIT.md) · [**ملاحظات التصميم**](DESIGN.md)
+[**▶ العب الآن**](play/) · [**صفحة المشروع**](index.html) · [**العرض (PPTX)**](docs/ZATHURA-pitch-ar.pptx) · [**دليل المحكّمين**](docs/JUDGES.md) · [**المرجع العلمي (PDF)**](docs/science-reference-15-scenarios-ar.pdf) · [**تدقيق المصادر**](SOURCES-AUDIT.md) · [**ملاحظات التصميم**](DESIGN.md)
 
 <sub>العربية ↓ · [English ↓](#-english)</sub>
 
@@ -88,6 +88,18 @@
 > ⚠️ **أمانة علمية:** الأرقام محاكاة تعليمية مبنية على قيم منشورة وليست قياسات حيّة.
 > وحدة RadLab غير موثّقة علنًا، ومصادر DONKI بجودة «prototyping» وليست تنبؤات رسمية (المرجع NOAA SWPC).
 
+### للمحكّمين — أين الدليل
+
+| المعيار | الدليل داخل المستودع |
+|---|---|
+| **Impact** | عربي أولًا ٧–١٢ · أوفلاين · بلا تثبيت — [صفحة المشروع](index.html#judging) |
+| **Creativity** | الوقت هو العملة + محرّك أحداث متكيّف + وضعان على نفس الثوابت |
+| **Validity** | ٢٢ مصدرًا منسوبًا · كل ثابت مُصنَّف — [SOURCES-AUDIT](SOURCES-AUDIT.md) |
+| **Relevance** | Artemis وبقاء الطاقم وISRU كميكانيكا أساسية |
+| **Presentation** | حزمة أوفلاين + صفحة ثنائية اللغة + عرض ١٤ سلايدًا + PDF |
+
+التفصيل الكامل (معمارية، تحقّق، حدود معروفة): [`docs/JUDGES.md`](docs/JUDGES.md)
+
 ### وضعان للعب — بوابة واحدة
 
 | | الوضع ١ — محاكي القاعدة | الوضع ٢ — أوديسي: مهمة البقاء |
@@ -131,7 +143,7 @@ index.html              →  صفحة المشروع (GitHub Pages)
 assets/                 →  لقطات · أيقونة · site.css · site.js
 data/donki/             →  أرشيف أحداث مايو ٢٠٢٤
 tools/verify-build.js   →  فحص قابلية إعادة البناء
-docs/                   →  المرجع العلمي (PDF) + العرض التقديمي (PPTX) + دليل عربي
+docs/                   →  دليل المحكّمين (JUDGES) + العرض (PPTX) + المرجع العلمي (PDF)
 ```
 
 كل شاشة تسجّل نفسها بـ `registerScreen(name, {mount, unmount})` والراوتر ينقل بـ `go(name)`،
