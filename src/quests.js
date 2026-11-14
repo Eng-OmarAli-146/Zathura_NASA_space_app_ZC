@@ -117,14 +117,18 @@ const Quest = (() => {
     render();
   }
 
+/* @QA-BEGIN */
   /* @QA — أدوات الاختبار */
   function __completeAll() { state.items.slice(0, -1).forEach(q => { q.done = true; }); state.idx = state.items.length - 1; render(); }
+/* @QA-END */
 
   return {
     serialize,
     restore,
     reset, mount, complete, setProgress, isDone, activeId, allDone, markMissed,
+/* @QA-BEGIN */
     __completeAll,
+/* @QA-END */
     get items() { return state.items; }
   };
 })();

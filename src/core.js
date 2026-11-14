@@ -213,8 +213,10 @@ const UPG = (() => {
       persist();
       return { ok: true, cost, lv: store.lv[id] };
     },
+/* @QA-BEGIN */
     /* للاختبار/التصحيح فقط — تُزال من نسخة التوزيع */
     /* @QA:upg */ _grant(n) { store.credits += (n | 0); persist(); },
+/* @QA-END */
   };
 })();
 window.UPG = UPG;

@@ -1826,8 +1826,6 @@ const UPG = (() => {
       persist();
       return { ok: true, cost, lv: store.lv[id] };
     },
-    /* للاختبار/التصحيح فقط — تُزال من نسخة التوزيع */
-    /* @QA:upg */ _grant(n) { store.credits += (n | 0); persist(); },
   };
 })();
 window.UPG = UPG;
@@ -2777,14 +2775,11 @@ const Quest = (() => {
     render();
   }
 
-  /* @QA — أدوات الاختبار */
-  function __completeAll() { state.items.slice(0, -1).forEach(q => { q.done = true; }); state.idx = state.items.length - 1; render(); }
 
   return {
     serialize,
     restore,
     reset, mount, complete, setProgress, isDone, activeId, allDone, markMissed,
-    __completeAll,
     get items() { return state.items; }
   };
 })();
@@ -4554,11 +4549,6 @@ registerScreen('boarding', {
 
     frame(performance.now());
 
-    /* @QA — أدوات اختبار */
-    window.Board = {
-      get state() { return { phase, x: player.x, active: Quest.activeId() }; }, // @QA
-      teleport(v) { player.x = v; } // @QA
-    };
 
     this._stop = () => {
       stop = true; cancelAnimationFrame(raf); cvs.destroy();
@@ -5378,7 +5368,6 @@ registerScreen('launch', {
 
     frame(performance.now());
 
-    /* @QA */ window.Launch = { get lit() { return lit; }, get pressure() { return pressure; }, ignite };
 
     this._stop = () => {
       stop = true; cancelAnimationFrame(raf); cvs.destroy();
@@ -7995,11 +7984,6 @@ registerScreen('outpost', {
       go('result');
     }
 
-    Out.__event = triggerEvent;
-    Out.__pick = pickScenarioWeighted;   // @QA
-    Out.__endSol = () => { Out.simT = 0; tickSol(); };
-    Out.__completeQuests = () => Quest.__completeAll(); // @QA
-    Out.__beginReturn = beginReturn; // @QA
 
     this._stop = () => {
       stop = true; cancelAnimationFrame(raf); cvs.destroy();
@@ -8923,30 +8907,6 @@ registerScreen('return', {
 
     frame(performance.now());
 
-    /* @QA */ window.Return = {
-      get phase() { return phase; },
-      get integrity() { return R.integrity; },
-      get needle() { return R.needle; },
-      get zone() { return [R.zoneL, R.zoneL + 0.26]; },
-      get alt() { return phase === 'land' || phase === 'splash' ? R.landAlt : R.alt; },
-      get heat() { return R.heat; },
-      get tilt() { return R.tilt; }, // @QA
-      get landing() { return R.landing; },
-      skipTo(name) {   // @QA
-        phase = name; phaseT = 0;
-        if (name === 'entry') { courseWrap.classList.add('hidden'); showEntryPads(true); R.alt = 121; setPhaseLabel('ATMOSPHERIC ENTRY'); }
-        if (name === 'land') { R.landAlt = 15.2; showEntryPads(false); $('land-alt').classList.remove('hidden'); $('chute-btn').classList.remove('hidden'); setPhaseLabel('LANDING'); }
-      },
-      lockCourse() { for (let i = 0; i < 3 - R.courseLocks; i++) tryLockCourse(); }, // @QA
-      resolveEvents() {   // @QA
-        while (R.eventsFired.length < 2) {
-          fireEvent();
-          const firstGood = $('ret-choices') && $('ret-choices').children[0];
-          if (firstGood) firstGood.click(); else break;
-        }
-      },
-      deploy() { deployChute(); } // @QA
-    };
 
     this._stop = () => {
       stop = true; cancelAnimationFrame(raf); cvs.destroy();
