@@ -2601,11 +2601,13 @@ registerScreen('outpost', {
       go('result');
     }
 
+/* @QA-BEGIN */
     Out.__event = triggerEvent;
     Out.__pick = pickScenarioWeighted;   // @QA
     Out.__endSol = () => { Out.simT = 0; tickSol(); };
     Out.__completeQuests = () => Quest.__completeAll(); // @QA
     Out.__beginReturn = beginReturn; // @QA
+/* @QA-END */
 
     this._stop = () => {
       stop = true; cancelAnimationFrame(raf); cvs.destroy();

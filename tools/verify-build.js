@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* ============================================================================
    tools/verify-build.js
-   Ensures the committed play.html is exactly what src/ produces.
+   Ensures the committed play/game1.html is exactly what src/ produces.
 
    The whole point of committing a build is that a judge (or a teacher with no
    Node installed) can open the game and it works. The point of this script is
@@ -18,10 +18,10 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 const ROOT = path.join(__dirname, '..');
-const COMMITTED = path.join(ROOT, 'play.html');
+const COMMITTED = path.join(ROOT, 'play', 'game1.html');
 
 if (!fs.existsSync(COMMITTED)) {
-  console.error('✖ play.html not found — run: node build.js');
+  console.error('✖ play/game1.html not found — run: node build.js');
   process.exit(1);
 }
 
@@ -30,19 +30,20 @@ let failed = false;
 
 try {
   fs.cpSync(path.join(ROOT, 'src'), path.join(tmp, 'src'), { recursive: true });
+  fs.mkdirSync(path.join(tmp, 'play'), { recursive: true });
   fs.copyFileSync(path.join(ROOT, 'build.js'), path.join(tmp, 'build.js'));
 
   execFileSync(process.execPath, ['build.js'], { cwd: tmp, stdio: 'pipe' });
 
-  const fresh = fs.readFileSync(path.join(tmp, 'play.html'));
+  const fresh = fs.readFileSync(path.join(tmp, 'play', 'game1.html'));
   const committed = fs.readFileSync(COMMITTED);
 
   if (fresh.equals(committed)) {
     const kb = (committed.length / 1024).toFixed(1);
-    console.log(`✅ play.html matches src/ (${kb} KB, byte-for-byte)`);
+    console.log(`✅ play/game1.html matches src/ (${kb} KB, QA hooks stripped, byte-for-byte)`);
   } else {
     failed = true;
-    console.error('✖ play.html does NOT match src/');
+    console.error('✖ play/game1.html does NOT match src/');
     console.error(`  committed: ${committed.length} bytes`);
     console.error(`  rebuilt:   ${fresh.length} bytes`);
 
@@ -57,7 +58,7 @@ try {
         shown++;
       }
     }
-    console.error('  → run: node build.js && git add play.html');
+    console.error('  → run: node build.js && git add play/game1.html');
   }
 } finally {
   fs.rmSync(tmp, { recursive: true, force: true });
