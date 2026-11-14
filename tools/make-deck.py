@@ -459,6 +459,158 @@ footer(s, 8)
 notes(s, 'أقوى نقطة تقييم: الدقة. اللعبة نفسها بتقول للحكم أي رقم من NASA وأي رقم تقدير '
          'من اللعبة — وده بيمنع أي ادعاء زائد. (راجع SOURCES-AUDIT.md في المستودع.)')
 
+# ── ٩ · المعمارية ─────────────────────────────────────────────────────────
+s = blank(prs)
+eyebrows(s, 'ARCHITECTURE · DATA → MECHANIC')
+title(s, 'من الرقم… للميكانيكا')
+
+flow = [
+    ('01 · DATA', 'data/donki/*.json + ثوابت BVAD/ECLSS وRAD/MSL ← مصدر واحد في missiondata.js'),
+    ('02 · ENGINE', 'core.js (حالة · ساعة · صوت) + quests.js (تسلسل) + screens_*.js (ست شاشات)'),
+    ('03 · BUILD', 'build.js → play/game1.html: ملف واحد مكتفٍ بذاته، وأدوات QA تُزال بالعلامات'),
+    ('04 · PROOF', 'tools/verify-build.js + CI: إعادة بناء ومقارنة بايت ببايت مع كل push'),
+]
+y = 1.8
+for k, v in flow:
+    box = rect(s, 6.55, y, 6.0, 0.98, fill=PANEL, line=RGBColor(0x18, 0x2A, 0x3C), radius=0.08)
+    tf = box.text_frame
+    tf.margin_left = Pt(16); tf.margin_right = Pt(16); tf.margin_top = Pt(10)
+    tf.vertical_anchor = MSO_ANCHOR.MIDDLE
+    p = para(tf, first=True, space_after=2)
+    r = p.add_run(); r.text = k; font(r, 9.5, CYAN, bold=True, face=MONO)
+    p = para(tf, space_after=0, line=1.25)
+    r = p.add_run(); r.text = v; font(r, 11.5, DIM)
+    y += 1.12
+
+stack1 = rect(s, 0.8, 1.8, 5.35, 1.55, fill=PANEL_2, line=RGBColor(0x1B, 0x3A, 0x50), radius=0.07)
+tf = stack1.text_frame
+tf.margin_left = Pt(16); tf.margin_right = Pt(16); tf.margin_top = Pt(12)
+p = para(tf, first=True, space_after=6)
+r = p.add_run(); r.text = 'MODE 01 · OUTPOST'
+font(r, 10, CYAN, bold=True, face=MONO)
+p = para(tf, space_after=2, line=1.4)
+r = p.add_run(); r.text = 'Vanilla JS · Canvas 2D · Web Audio API'
+font(r, 11.5, WHITE)
+p = para(tf, space_after=0, line=1.4)
+r = p.add_run(); r.text = 'صفر تبعيات · ملف واحد · بلا أصول خارجية'
+font(r, 11, DIM)
+
+stack2 = rect(s, 0.8, 3.5, 5.35, 1.55, fill=PANEL_2, line=RGBColor(0x3A, 0x2A, 0x14), radius=0.07)
+tf = stack2.text_frame
+tf.margin_left = Pt(16); tf.margin_right = Pt(16); tf.margin_top = Pt(12)
+p = para(tf, first=True, space_after=6)
+r = p.add_run(); r.text = 'MODE 02 · ODYSSEY'
+font(r, 10, AMBER, bold=True, face=MONO)
+p = para(tf, space_after=2, line=1.4)
+r = p.add_run(); r.text = 'React 19 · TypeScript · Vite + viteSingleFile'
+font(r, 11.5, WHITE)
+p = para(tf, space_after=0, line=1.4)
+r = p.add_run(); r.text = 'Three.js / WebGL · Pointer Lock + لمس'
+font(r, 11, DIM)
+
+tf = textbox(s, 0.8, 5.25, 5.35, 1.2)
+p = para(tf, first=True, space_after=0, line=1.5)
+r = p.add_run(); r.text = 'الرابط بين الوضعين: نفس الثوابت ونفس الوجهات ونفس القائد — '
+font(r, 11, DIM)
+r = p.add_run(); r.text = 'لا إعادة استخدام سطحية.'
+font(r, 11, CYAN, bold=True)
+
+footer(s, 9)
+notes(s, 'لو الحكم مهتم بالتقنية: الوضع ١ كود عادي بدون أي مكتبة ويُبنى في ملف واحد، '
+         'والوضع ٢ React + Three.js. الفكرة إن الأرقام واحدة، والعرض مختلف.')
+
+# ── ١٠ · التحقق ───────────────────────────────────────────────────────────
+s = blank(prs)
+eyebrows(s, 'VERIFICATION · TRUST THE BUILD')
+title(s, 'الملف اللي بتفتحه = المصدر')
+lead(s, 'مش مطلوب منك تصدّقنا — تقدر تعيد البناء وتقارن.', y=1.6)
+
+bullets(textbox(s, 7.0, 2.35, 5.55, 2.9), [
+    'البناء قابل لإعادة الإنتاج: node build.js يطلع نفس الملف',
+    'CI يشغّل المقارنة بايت ببايت مع كل push',
+    'أدوات الاختبار (@QA) لا تصل للاعب ولا للمحكّم',
+    'تدقيق المصادر منشور في SOURCES-AUDIT.md',
+], size=13, space_after=12)
+
+code = rect(s, 0.8, 2.35, 5.85, 1.55, fill=RGBColor(0x02, 0x05, 0x0A), line=RGBColor(0x1E, 0x6A, 0x86), radius=0.04)
+tf = code.text_frame
+tf.margin_left = Pt(16); tf.margin_right = Pt(16); tf.margin_top = Pt(12)
+for i, (line, col) in enumerate([
+    ('$ node tools/verify-build.js', DIM2),
+    ('✓ built play/game1.html (524.4 KB)', WHITE),
+    ('✅ matches src/ — byte-for-byte', GREEN),
+]):
+    p = para(tf, first=(i == 0), align=PP_ALIGN.LEFT, rtl=False, space_after=4, line=1.2)
+    r = p.add_run(); r.text = line; font(r, 11, col, face=MONO)
+
+chip(s, 4.85, 4.15, 1.75, 0.85, 'CI', 'كل push', color=GREEN)
+chip(s, 6.75, 4.15, 1.75, 0.85, '0', 'تبعيات', color=AMBER)
+chip(s, 8.65, 4.15, 1.75, 0.85, '22', 'مصدرًا منسوبًا')
+chip(s, 10.55, 4.15, 1.78, 0.85, '٥', 'سلايدات بمصادر')
+
+footer(s, 10)
+notes(s, 'النقطة دي بتميّز المشروع: مفيش «صدّقني» — فيه أمر واحد يشغّله الحكم '
+         'ويتأكد إن الملف المرفوع هو نفسه اللي الكود بيطلّعه.')
+
+# ── ١١ · معايير التقييم ───────────────────────────────────────────────────
+s = blank(prs)
+eyebrows(s, 'ALIGNMENT · THE FIVE CRITERIA')
+title(s, 'خريطة معايير التقييم')
+
+crit = [
+    ('Impact', 'فجوة محتوى عربي ٧–١٢ · يعمل بلا إنترنت على أجهزة المدرسة', CYAN),
+    ('Creativity', 'الوقت هو العملة · محرك أحداث متكيّف · وضعان على نفس الثوابت', CYAN),
+    ('Validity', '٢٢ مصدرًا · كل ثابت مُصنَّف: بيانات NASA أو تقدير لعبة', GREEN),
+    ('Relevance', 'Artemis وبقاء الطاقم وISRU — فكرة التحدي نفسها كميكانيكا', CYAN),
+    ('Presentation', 'حزمة أوفلاين · صفحة ثنائية اللغة · عرض · PDF · بناء متحقَّق', CYAN),
+    ('Known limits', 'بدون تجربة ميدانية بعد · مصدر الوضع ٢ خارج المستودع', AMBER),
+]
+x0, y0 = 8.85, 2.05
+for i, (head, desc, col) in enumerate(crit):
+    ci, ri = i % 3, i // 3
+    x = x0 - ci * 4.0
+    yy = y0 + ri * 2.25
+    card = rect(s, x, yy, 3.75, 2.0, fill=PANEL, line=RGBColor(0x18, 0x2A, 0x3C), radius=0.07)
+    tf = card.text_frame
+    tf.margin_left = Pt(14); tf.margin_right = Pt(14); tf.margin_top = Pt(14)
+    p = para(tf, first=True, space_after=8)
+    r = p.add_run(); r.text = head; font(r, 14, col, bold=True)
+    p = para(tf, space_after=0, line=1.4)
+    r = p.add_run(); r.text = desc; font(r, 10.5, DIM)
+
+tf = textbox(s, 0.8, 2.05, 3.6, 1.6)
+p = para(tf, first=True, space_after=8, line=1.4)
+r = p.add_run(); r.text = 'باختصار:'
+font(r, 12, DIM2, bold=True)
+p = para(tf, space_after=0, line=1.5)
+r = p.add_run(); r.text = 'كل معيار من الخمسة له دليل داخل المستودع يمكن فتحه — مش وعد في وصف.'
+font(r, 11.5, WHITE)
+
+footer(s, 11)
+notes(s, 'استخدم السلايد دي لو الحكم سأل «إزاي تطابقوا المعايير؟» — '
+         'كل معيار جنبه الدليل اللي يتفتح فورًا.')
+
+# ── ١٢ · معرض اللقطات ─────────────────────────────────────────────────────
+s = blank(prs)
+eyebrows(s, 'SCREENS · FROM THE ACTUAL BUILDS')
+title(s, 'من داخل النسختين', y=0.78, size=30)
+
+shots = [
+    ('shot-hq.jpg', 6.95, 1.55, 'الوضع ١ — مركز التحكّم'),
+    ('shot-intro.jpg', 0.8, 1.55, 'الوضع ١ — منصّة الإطلاق'),
+    ('shot-odyssey-menu.jpg', 6.95, 4.35, 'الوضع ٢ — شاشة أوديسي و«ناسا لايف»'),
+    ('shot-odyssey-briefing.jpg', 0.8, 4.35, 'الوضع ٢ — إحاطة المهمة وصعوبات الوجهات'),
+]
+for name, x, y, cap in shots:
+    picture(s, name, x, y, 5.6, 2.1)
+    tf = textbox(s, x, y + 2.2, 5.6, 0.28)
+    p = para(tf, first=True, space_after=0)
+    r = p.add_run(); r.text = cap
+    font(r, 9.5, DIM2)
+
+footer(s, 12)
+notes(s, 'لقطات حقيقية من النسختين — مفيش renders ولا صور تخيّلية. اسحب بسرعة وكمّل.')
+
 # ── ٩ · إزاي نستخدمها ─────────────────────────────────────────────────────
 s = blank(prs)
 eyebrows(s, 'HOW TO USE IT')
@@ -494,7 +646,7 @@ font(r, 11.5, GREEN, bold=True)
 r = p.add_run(); r.text = '٥–١٠ دقايق تمهيد + مهمة واحدة في الحصة — مفيش حسابات، مفيش إنترنت، مفيش تثبيت.'
 font(r, 11.5, DIM)
 
-footer(s, 9)
+footer(s, 13)
 notes(s, 'اعرض خطوة واحدة عمليًا: افتح البوابة، اختار الوضع، وامشِ بالـWASD — '
          '٤٠ ثانية كفاية يبان إنها شغالة فعلاً.')
 
@@ -537,7 +689,7 @@ r = p.add_run(); r.text = ('مشروع تعليمي مستقل غير رسمي �
                            'وبيانات NASA منسوبة داخل اللعبة وفي لوحة المصادر.')
 font(r, 9.5, DIM2)
 
-footer(s, 10)
+footer(s, 14)
 notes(s, 'اقفل على الجملة الكبيرة، وبعدها سؤال للجنة: «عايزين الطفل يفتكر إيه بعد ساعة لعب؟» '
          'الإجابة: إن كل قرار في الفضاء له ثمن — وإن الوقت أغلى مورد.')
 
@@ -545,4 +697,4 @@ notes(s, 'اقفل على الجملة الكبيرة، وبعدها سؤال ل
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 prs.save(OUT)
 size_kb = os.path.getsize(OUT) / 1024
-print(f'✓ {os.path.relpath(OUT, ROOT)} — {len(prs.slides.__iter__.__self__._sldIdLst)} slides, {size_kb:.0f} KB')
+print(f'✓ {os.path.relpath(OUT, ROOT)} — {len(prs.slides._sldIdLst)} slides, {size_kb:.0f} KB')
