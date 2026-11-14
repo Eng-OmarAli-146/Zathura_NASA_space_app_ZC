@@ -624,6 +624,7 @@ registerScreen('return', {
 
     frame(performance.now());
 
+/* @QA-BEGIN */
     /* @QA */ window.Return = {
       get phase() { return phase; },
       get integrity() { return R.integrity; },
@@ -648,6 +649,7 @@ registerScreen('return', {
       },
       deploy() { deployChute(); } // @QA
     };
+/* @QA-END */
 
     this._stop = () => {
       stop = true; cancelAnimationFrame(raf); cvs.destroy();

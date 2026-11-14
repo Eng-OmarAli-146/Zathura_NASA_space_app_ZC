@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#04060b">
 <title>ZATHURA — مدرّب مهمّات رائد الفضاء | NASA Space Apps Challenge 2026</title>
 
-<meta name="description" content="ZATHURA لعبة محاكاة فضائية تعليمية في المتصفح للأعمار ٧–١٢: تدير قاعدة على المريخ والقمر وعطارد بموارد حقيقية وجرعة إشعاع لا تُرجَع وبيانات NASA الفعلية (DONKI · RAD/MSL · BVAD 2022). بدون تثبيت وبدون إنترنت.">
+<meta name="description" content="ZATHURA لعبة فضائية تعليمية في المتصفح للأعمار ٧–١٢ بوضعين: محاكي قاعدة استراتيجي ومهمة بقاء بالمنظور الأول — على المريخ والقمر وعطارد والزهرة وزحل/تايتان وزويل، بموارد حقيقية وجرعة إشعاع لا تُرجَع وبيانات NASA (DONKI · RAD/MSL · BVAD 2022). بدون تثبيت وبدون إنترنت.">
 <meta name="author" content="ZATHURA Team">
 <meta name="robots" content="index,follow">
 <link rel="canonical" href="https://eng-omarali-146.github.io/Zathura_NASA_space_app_ZC/">
@@ -15,7 +15,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="ZATHURA">
 <meta property="og:title" content="ZATHURA — Junior Astronaut Mission Trainer">
-<meta property="og:description" content="A browser-based space mission trainer built on real NASA data. 6 destinations, 27 scenarios, 18 NASA sources — offline, no install, Arabic-first for ages 7–12.">
+<meta property="og:description" content="A browser-based space trainer with two modes — a strategic base simulator and a first-person 3D survival mission. 6 destinations, 36 scenarios, 22 NASA sources, offline, Arabic-first for ages 7–12.">
 <meta property="og:image" content="https://eng-omarali-146.github.io/Zathura_NASA_space_app_ZC/assets/shot-storm.jpg">
 <meta property="og:image:width" content="1400">
 <meta property="og:image:height" content="840">
@@ -71,6 +71,7 @@
     </a>
 
     <nav class="nav-links" aria-label="أقسام الصفحة">
+      <a href="#modes" data-en="Two modes">الوضعان</a>
       <a href="#idea" data-en="The idea">الفكرة</a>
       <a href="#mechanics" data-en="Mechanics">الميكانيكا</a>
       <a href="#isru" data-en="ISRU">الموارد المحلية</a>
@@ -90,7 +91,7 @@
           <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.4 7.4 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z"/>
         </svg>
       </a>
-      <a class="btn sm" href="play.html" data-en="▶ Play">▶ العب</a>
+      <a class="btn sm" href="play/" data-en="▶ Play">▶ العب</a>
     </div>
 
     <div class="progress" id="progress" aria-hidden="true"></div>
@@ -113,16 +114,17 @@
         <h1 class="wordmark">ZATHURA</h1>
         <p class="hero-sub" data-en="Junior Astronaut Mission Trainer">مدرّب مهمّات رائد الفضاء</p>
 
-        <p class="hero-line" data-en="A browser space-simulation game for ages 7–12. You run a base on Mars, the Moon, Mercury, Venus, Saturn or Zewail — with real resource budgets, a radiation dose that never resets, and actual NASA data behind the numbers. No install. No internet.">
+        <p class="hero-line" data-en="Two modes, one launcher: a strategic base simulator and a first-person survival mission — across Mars, the Moon, Mercury, Venus, Saturn/Titan and Zewail. Real resource budgets, a radiation dose that never resets, and actual NASA data behind every number. No install. No internet.">
           لعبة محاكاة فضائية تعليمية في المتصفح، للأعمار <b class="hl">٧–١٢</b>.
-          تدير قاعدة على المريخ والقمر وعطارد والزهرة وزحل وكوكب زويل —
+          <b class="hl">وضعان</b> يبدآن من بوابة واحدة: محاكي قاعدة استراتيجي، ومهمة بقاء بالمنظور الأول —
+          على المريخ والقمر وعطارد والزهرة وزحل/تايتان وكوكب زويل.
           بموازنات موارد حقيقية، و<b class="hl-c">جرعة إشعاع لا تُرجَع</b>،
           وبيانات NASA الفعلية وراء كل رقم. بدون تثبيت، وبدون إنترنت.
         </p>
 
         <div class="hero-cta">
-          <a class="btn" href="play.html" data-en="🚀 Play now">🚀 العب الآن</a>
-          <a class="btn ghost" href="#mechanics" data-en="How it works">كيف تلعب</a>
+          <a class="btn" href="play/" data-en="🚀 Play now">🚀 العب الآن</a>
+          <a class="btn ghost" href="#modes" data-en="Two modes">وضعا اللعب</a>
           <a class="btn ghost" href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC"
              target="_blank" rel="noopener" dir="ltr">
             <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
@@ -157,10 +159,83 @@
     <!-- stats -->
     <div class="stats">
       <div class="stat reveal"><b>6</b><span data-en="Destinations">وجهات</span></div>
-      <div class="stat reveal"><b>27</b><span data-en="Scenarios">سيناريو</span></div>
-      <div class="stat reveal"><b>18</b><span data-en="NASA sources">مصدر NASA</span></div>
-      <div class="stat reveal"><b>0</b><span data-en="Installs required">تثبيت مطلوب</span></div>
+      <div class="stat reveal"><b>36</b><span data-en="Scenarios">سيناريو</span></div>
+      <div class="stat reveal"><b>22</b><span data-en="NASA sources">مصدر NASA</span></div>
+      <div class="stat reveal"><b>2</b><span data-en="Game modes">وضعا لعب</span></div>
     </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════ MODES ══════════════════════════════ -->
+<section id="modes">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="Two ways to play">وضعان للعب</p>
+      <h2 data-en="One launch. Pick your seat.">إقلاع واحد. <span class="hl-c">اختار مقعدك</span>.</h2>
+      <p class="lead" data-en="Both modes open from the same gate and share one story: Cmdr. Mo’men (مُؤمن), an Egyptian astronaut. One is a strategic base you keep alive Sol after Sol; the other is a first-person wreck you have to fix before the clock runs out.">
+        الوضعان يفتحان من بوابة واحدة ويشتركان في قصة واحدة: القائد <b class="hl">مُؤمن</b> — رائد فضاء مصري 🇪🇬.
+        واحد قاعدة استراتيجية تُبقيها حيّة Sol ورا Sol، والتاني سفينة بتتصلّح في الوقت الحقيقي قبل ما الوقت يخلص.
+      </p>
+    </div>
+
+    <div class="modes">
+      <article class="mode reveal">
+        <a class="mode-thumb" href="play/game1.html" aria-label="العب الوضع ١">
+          <img src="assets/shot-hq.jpg" width="1400" height="840" loading="lazy" decoding="async"
+               alt="مركز التحكّم في الوضع الأول: خريطة مهام وإحاطة هولوغرافية واللاعب واقف في القاعة">
+        </a>
+        <div class="mode-body">
+          <div class="mode-k"><b>MODE 01</b> · <span data-en="Strategic sim">المحاكي الاستراتيجي</span></div>
+          <h3>ZATHURA OUTPOST</h3>
+          <p class="mode-sub" data-en="Run the base. Keep the crew breathing.">قُد القاعدة. خلّي الطاقم بيتنفّس.</p>
+          <p data-en="Every morning you distribute 15 power units, dig ice, plant food — and every choice comes back later.">
+            كل صباح توزّع ١٥ وحدة طاقة، تحفر الثلج، وتزرع أكلك بنفسك — وكل قرار بيرجع لك بعدين.
+          </p>
+          <ul class="mode-list">
+            <li data-en="🧠 36 critical situations — no single right answer">🧠 ٣٦ موقفًا حرجًا — مفيش حل واحد صح</li>
+            <li data-en="⚙️ 5 systems competing for one power budget">⚙️ ٥ أنظمة تتزاحم على ميزانية طاقة واحدة</li>
+            <li data-en="🎒 EVA trips with a real cost in hours and dose">🎒 خروج EVA بتكلفة ساعات وجرعة حقيقية</li>
+            <li data-en="🌱 A greenhouse you grow from seed to harvest">🌱 دفيئة من البذرة لحد الحصاد</li>
+          </ul>
+          <div class="chips">
+            <span data-en="Arabic 100%">عربي ١٠٠٪</span>
+            <span data-en="offline">بلا إنترنت</span>
+            <span data-en="base + EVA">قاعدة + EVA</span>
+          </div>
+          <a class="btn sm" href="play/game1.html" data-en="▶ Play Mode 1">▶ العب الوضع ١</a>
+        </div>
+      </article>
+
+      <article class="mode reveal">
+        <a class="mode-thumb" href="play/game2.html" aria-label="العب الوضع ٢">
+          <img src="assets/shot-odyssey-ingame.jpg" width="1400" height="840" loading="lazy" decoding="async"
+               alt="الوضع الثاني: ممرات المركبة بالمنظور الأول مع شريط موارد حيّ وطاقم ينتظر">
+        </a>
+        <div class="mode-body">
+          <div class="mode-k"><b>MODE 02</b> · <span data-en="First person · 3D">المنظور الأول · 3D</span></div>
+          <h3>ODYSSEY · SURVIVE</h3>
+          <p class="mode-sub" data-en="You are the commander — and the crew is waiting.">أنت القائد — والطاقم مستنيك.</p>
+          <p data-en="You are Cmdr. Mo’men aboard a spacecraft: run the corridors, solve problems fast, and the landing is yours to fly.">
+            أنت القائد مُؤمن على متن سفينة: اركض في الممرات، احلّ المشاكل بسرعة، والهبوط في إيدك.
+          </p>
+          <ul class="mode-list">
+            <li data-en="🕹️ WASD + mouse + hold-E, with a full touch joystick">🕹️ WASD + ماوس + E مطوّل، وعصا تحكم باللمس</li>
+            <li data-en="🔥 8 disasters: fire, hull breach, solar storm, meteorites">🔥 ٨ كوارث: حريق، ثقب، عاصفة شمسية، نيازك</li>
+            <li data-en="🏜️ 6 landing sites, each with its own temper">🏜️ ٦ أماكن هبوط، ولكل وجهة طبعها</li>
+            <li data-en="🛰️ NASA Live: today’s flares and near-Earth objects affect your flight">🛰️ ناسا لايف: توهجات الشمس والكويكبات بتأثر على رحلتك</li>
+          </ul>
+          <div class="chips">
+            <span>React 19</span><span>Three.js</span>
+            <span data-en="NASA Live (optional)">ناسا لايف (اختياري)</span>
+          </div>
+          <a class="btn sm" href="play/game2.html" data-en="▶ Play Mode 2">▶ العب الوضع ٢</a>
+        </div>
+      </article>
+    </div>
+
+    <p class="muted" style="font-size:12.5px;margin-top:18px" data-en="Both modes are also reachable from the launcher at play/index.html — the same package you can hand to a judge offline.">
+      الوضعان متاحان كذلك من بوابة <a href="play/" style="color:var(--cyan)">play/index.html</a> — نفس الحزمة اللي تديها للمحكّم أوفلاين.
+    </p>
   </div>
 </section>
 
@@ -261,8 +336,8 @@
       <article class="card reveal">
         <div class="ico" aria-hidden="true">🛰️</div>
         <h3 data-en="An adaptive event engine">محرّك أحداث يتكيّف معك</h3>
-        <p data-en="27 scenarios across 15 scene types, weighted by your own past decisions. Repeat bad calls raise the odds of radiation scenarios — and nothing repeats back to back.">
-          ٢٧ سيناريو على ١٥ نوع مشهد، موزونة على قراراتك السابقة.
+        <p data-en="36 critical situations, weighted by your own past decisions. Repeat bad calls raise the odds of radiation scenarios — and nothing repeats back to back.">
+          ٣٦ موقفًا حرجًا، موزونة على قراراتك السابقة.
           تكرار الخطأ يرفع احتمال سيناريوهات الإشعاع، ولا يُعاد نفس الحدث مرتين وراء بعض.
         </p>
         <span class="tagline">ADAPTIVE</span>
@@ -395,7 +470,7 @@
 
       <article class="dest reveal" style="--pc:#d9c27a">
         <div class="planet ring" aria-hidden="true"></div>
-        <div class="dest-top"><h3 data-en="Saturn">زحل</h3><span class="idx">05</span></div>
+        <div class="dest-top"><h3 data-en="Saturn / Titan">زحل / تايتان</h3><span class="idx">05</span></div>
         <div class="veh">Cassini II</div>
         <p data-en="An orbital station with Titan excursions, ring debris and the hardest resource of all: company.">محطة مدارية مع رحلات تايتان، حطام الحلقات، وأصعب مورد: الرفقة.</p>
         <div class="heritage"><span data-en="Heritage:">المرجع:</span> <b>Cassini–Huygens</b></div>
@@ -545,8 +620,8 @@
     <div class="sec-head">
       <p class="eyebrow" data-en="From the build">من داخل اللعبة</p>
       <h2 data-en="Playable, not a mock-up.">قابلة للعب، لا <span class="hl-c">نموذج تصميم</span>.</h2>
-      <p class="lead" data-en="Both frames are captured from the actual build in this repository — no renders, no concept art.">
-        اللقطتان مأخوذتان من النسخة الفعلية في هذا المستودع — لا رسوم تخيّلية ولا «كونسبت».
+      <p class="lead" data-en="Every frame below is captured from the actual builds in this repository — no renders, no concept art.">
+        كل لقطة تحت مأخوذة من النسخ الفعلية في هذا المستودع — لا رسوم تخيّلية ولا «كونسبت».
       </p>
     </div>
 
@@ -560,6 +635,30 @@
         </div>
         <figcaption data-en="A solar storm mid-run: DONKI warning, 24-hour countdown, live resource HUD.">
           عاصفة شمسية أثناء اللعب: تحذير DONKI، عدّ تنازلي ٢٤، وشريط موارد حيّ.
+        </figcaption>
+      </figure>
+
+      <figure class="shot reveal">
+        <div class="frame">
+          <img src="assets/shot-hq.jpg" width="1400" height="840" loading="lazy" decoding="async"
+               alt="مركز التحكّم: خريطة مهام وإحاطة وبطاقة القائد مؤمن">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <figcaption data-en="Mode 1 — mission control: mission map, holographic briefing, crew roster.">
+          الوضع ١ — مركز التحكّم: خريطة مهام، إحاطة هولوغرافية، وقائمة الطاقم.
+        </figcaption>
+      </figure>
+
+      <figure class="shot reveal">
+        <div class="frame">
+          <img src="assets/shot-odyssey-ingame.jpg" width="1400" height="840" loading="lazy" decoding="async"
+               alt="الوضع الثاني أوديسي: ممرات المركبة بالمنظور الأول مع موارد وطاقم">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <figcaption data-en="Mode 2 — Odyssey in first person: corridor runs, live resources, a crew that depends on you.">
+          الوضع ٢ — أوديسي بالمنظور الأول: ممرات، موارد حيّة، وطاقم بيعتمد عليك.
         </figcaption>
       </figure>
 
@@ -593,50 +692,53 @@
     <div class="run-grid">
       <div class="run reveal">
         <span class="k">FASTEST</span>
-        <h3 data-en="Open the build">افتح النسخة الجاهزة</h3>
-        <p data-en="Double-click the built file in any modern browser. Nothing else needed.">دوس على الملف الجاهز في أي متصفح حديث. مش محتاج أي حاجة تانية.</p>
-        <div class="cmd"><code>play.html</code><button type="button" class="copy" data-copy-text="play.html" aria-label="نسخ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
+        <h3 data-en="Open the gate">افتح بوابة اللعب</h3>
+        <p data-en="One package, two games. Double-click it in any modern browser — nothing else needed.">حزمة واحدة، لعبتان. دوس على الملف في أي متصفح حديث — مش محتاج أي حاجة تانية.</p>
+        <div class="cmd"><code>play/index.html</code><button type="button" class="copy" data-copy-text="play/index.html" aria-label="نسخ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
       </div>
 
       <div class="run reveal">
         <span class="k">DEVELOP</span>
-        <h3 data-en="Rebuild from src/">أعد البناء من src/</h3>
-        <p data-en="build.js concatenates the ten modules and the stylesheet into one file, byte-for-byte reproducible.">
-          build.js يجمع الوحدات العشر وورقة الأنماط في ملف واحد، بإعادة إنتاج مطابقة بايت ببايت.
+        <h3 data-en="Rebuild Mode 1 from src/">أعد بناء الوضع ١ من src/</h3>
+        <p data-en="build.js concatenates the ten modules into play/game1.html and strips the QA hooks — byte-for-byte reproducible.">
+          build.js يجمع الوحدات العشر في play/game1.html ويزيل أدوات الاختبار — بإعادة إنتاج مطابقة بايت ببايت.
         </p>
         <div class="cmd"><code>node build.js</code><button type="button" class="copy" data-copy-text="node build.js" aria-label="نسخ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
       </div>
 
       <div class="run reveal">
-        <span class="k">TEST</span>
-        <h3 data-en="Play it through a server">شغّلها عبر سيرفر</h3>
-        <p data-en="Handy for local QA, for mobile testing over your LAN, and for checking the page exactly as GitHub Pages will serve it.">مفيدة للاختبار المحلي، وللتجربة على الموبايل عبر الشبكة، ولمعاينة الصفحة زي ما هتظهر على GitHub Pages بالظبط.</p>
-        <div class="cmd"><code>python3 -m http.server 8080</code><button type="button" class="copy" data-copy-text="python3 -m http.server 8080" aria-label="نسخ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
+        <span class="k">VERIFY</span>
+        <h3 data-en="Prove the build is honest">أثبت إنّ الملف المرفوع من المصدر</h3>
+        <p data-en="Rebuilds in a temp folder and byte-compares with the committed game — CI runs this on every push.">يعيد البناء في مجلد مؤقت ويقارن بايت ببايت مع الملف المرفوع — وCI بيشغّله مع كل push.</p>
+        <div class="cmd"><code>node tools/verify-build.js</code><button type="button" class="copy" data-copy-text="node tools/verify-build.js" aria-label="نسخ"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg></button></div>
       </div>
     </div>
 
     <div class="grid g2" style="margin-top:clamp(16px,2.2vw,22px);align-items:start">
       <div class="reveal">
         <pre class="tree"><span class="d">Zathura_NASA_space_app_ZC/</span>
-├─ <span class="e">index.html</span>          <span class="c"># this project page</span>
-├─ <span class="e">play.html</span>           <span class="c"># built game — 526 KB, self-contained</span>
-├─ src/
-│  ├─ missiondata.js   <span class="c"># 6 missions · 27 scenarios · 18 sources</span>
-│  ├─ core.js          <span class="c"># state · audio · router · modals</span>
-│  ├─ render.js        <span class="c"># planets · stars · astronaut · particles</span>
-│  ├─ quests.js        <span class="c"># “my mission” sequencing engine</span>
+├─ <span class="e">index.html</span>            <span class="c"># this project page</span>
+├─ <span class="d">play/</span>                 <span class="c"># ★ the game package — open index.html</span>
+│  ├─ <span class="e">index.html</span>         <span class="c"># launcher: pick a mode</span>
+│  ├─ <span class="e">game1.html</span>        <span class="c"># MODE 01 · Outpost — built from src/</span>
+│  └─ <span class="e">game2.html</span>        <span class="c"># MODE 02 · Odyssey — React + Three.js</span>
+├─ src/                 <span class="c"># Mode 1 source (10 modules + stylesheet)</span>
+│  ├─ missiondata.js    <span class="c"># 6 missions · 36 scenarios · 22 sources</span>
+│  ├─ core.js · render.js · quests.js
 │  ├─ screens_intro.js · screens_hq.js · screens_launch.js
 │  ├─ screens_outpost.js <span class="c"># base world + walking + events</span>
 │  ├─ screens_return.js · screens_result.js
 │  └─ styles.css
-├─ build.js            <span class="c"># src/ → play.html (single file)</span>
-├─ data/donki/         <span class="c"># cached MAY 2024 space-weather events</span>
-├─ assets/             <span class="c"># screenshots · icon · site.css · site.js</span>
-├─ DESIGN.md           <span class="c"># mechanics &amp; balance design notes</span>
-├─ SOURCES-AUDIT.md    <span class="c"># source-by-source verification</span>
-└─ README.md</pre>
+├─ build.js             <span class="c"># src/ → play/game1.html (QA stripped)</span>
+├─ tools/verify-build.js <span class="c"># proves game1.html matches src/</span>
+├─ data/donki/          <span class="c"># cached MAY 2024 space-weather events</span>
+├─ docs/                <span class="c"># 15-scenario science reference (AR, PDF)</span>
+├─ assets/              <span class="c"># screenshots · icon · page CSS/JS</span>
+├─ DESIGN.md · SOURCES-AUDIT.md · README.md
+└─ .github/workflows/   <span class="c"># CI: verify build on every push</span></pre>
         <div class="chips">
           <span>Canvas 2D</span><span>Web Audio API</span><span>Vanilla JS</span>
+          <span>React 19</span><span>Three.js</span>
           <span data-en="zero dependencies">صفر تبعيات</span>
           <span data-en="single-file build">بناء ملف واحد</span>
           <span>RTL</span>
@@ -677,7 +779,7 @@
         صفر طلبات شبكة، وتشتغل من أول ثانية.
       </p>
       <div class="hero-cta">
-        <a class="btn" href="play.html" data-en="🚀 Launch ZATHURA">🚀 ابدأ مهمتك</a>
+        <a class="btn" href="play/" data-en="🚀 Launch ZATHURA">🚀 ابدأ مهمتك</a>
         <a class="btn ghost" href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/README.md" target="_blank" rel="noopener" data-en="Read the README">اقرأ الـREADME</a>
         <a class="btn ghost" href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/SOURCES-AUDIT.md" target="_blank" rel="noopener" data-en="Sources audit">تدقيق المصادر</a>
       </div>
@@ -708,10 +810,13 @@
       <div>
         <h4 data-en="The project">المشروع</h4>
         <ul>
-          <li><a href="play.html" data-en="Play the game">العب اللعبة</a></li>
+          <li><a href="play/" data-en="Play — choose a mode">العب — اختار الوضع</a></li>
+          <li><a href="play/game1.html" data-en="Mode 1 · Outpost">الوضع ١ · القاعدة</a></li>
+          <li><a href="play/game2.html" data-en="Mode 2 · Odyssey">الوضع ٢ · أوديسي</a></li>
           <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/README.md" target="_blank" rel="noopener" data-en="README">README</a></li>
           <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/DESIGN.md" target="_blank" rel="noopener" data-en="Design notes">ملاحظات التصميم</a></li>
           <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/SOURCES-AUDIT.md" target="_blank" rel="noopener" data-en="Sources audit">تدقيق المصادر</a></li>
+          <li><a href="docs/science-reference-15-scenarios-ar.pdf" target="_blank" rel="noopener" data-en="Science reference (PDF)">المرجع العلمي (PDF)</a></li>
           <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
       </div>

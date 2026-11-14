@@ -458,11 +458,13 @@ registerScreen('boarding', {
 
     frame(performance.now());
 
+/* @QA-BEGIN */
     /* @QA — أدوات اختبار */
     window.Board = {
       get state() { return { phase, x: player.x, active: Quest.activeId() }; }, // @QA
       teleport(v) { player.x = v; } // @QA
     };
+/* @QA-END */
 
     this._stop = () => {
       stop = true; cancelAnimationFrame(raf); cvs.destroy();
@@ -1282,7 +1284,9 @@ registerScreen('launch', {
 
     frame(performance.now());
 
+/* @QA-BEGIN */
     /* @QA */ window.Launch = { get lit() { return lit; }, get pressure() { return pressure; }, ignite };
+/* @QA-END */
 
     this._stop = () => {
       stop = true; cancelAnimationFrame(raf); cvs.destroy();
