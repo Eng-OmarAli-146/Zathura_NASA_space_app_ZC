@@ -77,6 +77,7 @@
       <a href="#isru" data-en="ISRU">الموارد المحلية</a>
       <a href="#destinations" data-en="Destinations">الوجهات</a>
       <a href="#science" data-en="The science">العلم</a>
+      <a href="#judging" data-en="For judges">للمحكّمين</a>
       <a href="#run" data-en="Run it">التشغيل</a>
     </nav>
 
@@ -614,14 +615,115 @@
   </div>
 </section>
 
+<!-- ══════════════════════════════ JUDGING ══════════════════════════════ -->
+<section id="judging">
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="eyebrow" data-en="For NASA Space Apps judges">للمحكّمين</p>
+      <h2 data-en="How it maps to the five criteria — and how it was built.">خريطة <span class="hl-c">التقييم الخمسة</span> — وكيف بُني المشروع.</h2>
+      <p class="lead" data-en="A one-screen answer to the questions judges actually ask: what is real, what is estimated, what was verified, and what is still missing.">
+        إجابة سريعة على الأسئلة اللي المحكّم بيسألها فعلًا: إيه الحقيقي، وإيه التقدير،
+        وإيه اللي اتحقّق منه، وإيه اللي لسه ناقص.
+      </p>
+    </div>
+
+    <div class="grid g3">
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">🎯</div>
+        <h3>Impact</h3>
+        <p data-en="An Arabic-first game for ages 7–12 that joins resource management, ISRU and real radiation limits — a combination that barely exists in Arabic at this reading level — and runs on school hardware with no internet.">
+          لعبة عربية أولًا للأعمار ٧–١٢ تجمع إدارة الموارد وISRU وحدود الإشعاع الحقيقية —
+          تركيبة شبه معدومة بالعربية في هذا المستوى — وتعمل على أجهزة المدرسة بدون إنترنت.
+        </p>
+        <span class="tagline">REAL-WORLD NEED</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">✦</div>
+        <h3>Creativity</h3>
+        <p data-en="“Time is the only currency” plus an adaptive event engine. Two radically different games — a 2D strategic sim and a first-person 3D mission — driven by the same constants and the same commander.">
+          «الوقت هو العملة الوحيدة» + محرّك أحداث يتكيّف مع قراراتك.
+          لعبتان مختلفتان جذريًا — استراتيجية 2D ومهمة 3D بالمنظور الأول — على نفس الثوابت ونفس القائد.
+        </p>
+        <span class="tagline">NOT A RESKIN</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">🔬</div>
+        <h3>Validity</h3>
+        <p data-en="Every constant is sourced: ECLSS, BVAD 2022, NASA STD-3001, RAD/MSL, and a cached DONKI May-2024 archive. 22 sources are attributed in-game, each number labelled NASA data or game estimate, and the audit is published.">
+          كل ثابت له مصدر: ECLSS · BVAD 2022 · NASA STD-3001 · RAD/MSL · أرشيف DONKI لمايو ٢٠٢٤.
+          ٢٢ مصدرًا منسوبًا داخل اللعبة، وكل رقم مُصنَّف، وتدقيق المصادر منشور في المستودع.
+        </p>
+        <span class="tagline">TRACEABLE</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">🛰️</div>
+        <h3>Relevance</h3>
+        <p data-en="Serves the Artemis / crew-survival and ISRU themes of The Next Frontier, and turns the brief’s own idea — that a mission is a chain of trade-offs — into the core mechanic rather than a decoration.">
+          يخدم محور Artemis وبقاء الطاقم وISRU في ثيم The Next Frontier، ويحوّل فكرة «المهمة سلسلة مقايضات»
+          إلى الميكانيكا الأساسية نفسها، لا إلى ديكور.
+        </p>
+        <span class="tagline">ON BRIEF</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">📦</div>
+        <h3>Presentation</h3>
+        <p data-en="One folder opens offline; a bilingual project page, a 13-slide deck with speaker notes, a 15-scenario science reference (PDF), and a README with run commands and a reproducible build.">
+          مجلد واحد يُفتح أوفلاين؛ صفحة مشروع ثنائية اللغة، وعرض تقديمي ١٤ سلايدًا بملاحظات متحدث،
+          ومرجع علمي PDF لخمسة عشر سيناريو، وREADME بأوامر التشغيل وبناء قابل للتحقق.
+        </p>
+        <span class="tagline">READY TO REVIEW</span>
+      </article>
+
+      <article class="card reveal">
+        <div class="ico" aria-hidden="true">🧭</div>
+        <h3 data-en="Honest limits">حدود معروفة</h3>
+        <p data-en="No classroom pilot data yet; Mode 2’s source lives outside this repository; audio is generated, not localised; canvas scenes have no screen-reader narration.">
+          مفيش بيانات تجربة ميدانية في فصل حتى الآن؛ مصدر الوضع ٢ خارج هذا المستودع؛
+          الصوت مُولَّد وغير مُترجم؛ ومشاهد الـcanvas بدون سرد لقارئ الشاشة.
+        </p>
+        <span class="tagline">WE SAY IT FIRST</span>
+      </article>
+    </div>
+
+    <div class="arch panel reveal">
+      <div class="panel-head">
+        <span data-en="Architecture · how a number becomes a mechanic">المعمارية · إزاي الرقم يتحوّل لميكانيكا</span>
+        <b>DATA → ENGINE → BUILD</b>
+      </div>
+      <div class="arch-body">
+        <div class="arch-row">
+          <span class="arch-k">01 · DATA</span>
+          <span class="arch-v"><code>data/donki/*.json</code> <span data-en="(cached May 2024 events)">(أحداث مايو ٢٠٢٤ محفوظة)</span> + <code>src/missiondata.js</code> <span data-en="— one source of truth for 6 missions, 36 scenarios, 22 sources and every constant.">— مصدر واحد للحقيقة: ٦ مهام، ٣٦ سيناريو، ٢٢ مصدرًا، وكل الثوابت.</span></span>
+        </div>
+        <div class="arch-row">
+          <span class="arch-k">02 · ENGINE</span>
+          <span class="arch-v"><code>core.js</code> <span data-en="state, clock, audio, router">حالة، ساعة، صوت، راوتر</span> · <code>quests.js</code> <span data-en="mission sequencing">تسلسل المهام</span> · <code>screens_*.js</code> <span data-en="six screens, Canvas 2D">ست شاشات على Canvas 2D</span></span>
+        </div>
+        <div class="arch-row">
+          <span class="arch-k">03 · BUILD</span>
+          <span class="arch-v"><code>build.js</code> → <code>play/game1.html</code> <span data-en="one self-contained file; QA hooks stripped by marker comments.">ملف واحد مكتفٍ بذاته، وأدوات QA تُزال بعلامات في المصدر.</span></span>
+        </div>
+        <div class="arch-row">
+          <span class="arch-k">04 · PROOF</span>
+          <span class="arch-v"><code>tools/verify-build.js</code> + <code>.github/workflows/verify.yml</code> <span data-en="— rebuilds and byte-compares the committed game on every push.">— يعيد البناء ويقارن الملف المرفوع بايت ببايت مع كل push.</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ══════════════════════════════ SHOTS ══════════════════════════════ -->
 <section id="shots">
   <div class="wrap">
     <div class="sec-head">
       <p class="eyebrow" data-en="From the build">من داخل اللعبة</p>
       <h2 data-en="Playable, not a mock-up.">قابلة للعب، لا <span class="hl-c">نموذج تصميم</span>.</h2>
-      <p class="lead" data-en="Every frame below is captured from the actual builds in this repository — no renders, no concept art.">
-        كل لقطة تحت مأخوذة من النسخ الفعلية في هذا المستودع — لا رسوم تخيّلية ولا «كونسبت».
+      <p class="lead" data-en="Six frames, captured from the two actual builds in this repository — no renders, no concept art.">
+        ست لقطات من النسختين الفعليتين في هذا المستودع — لا رسوم تخيّلية ولا «كونسبت».
       </p>
     </div>
 
@@ -647,6 +749,30 @@
         </div>
         <figcaption data-en="Mode 1 — mission control: mission map, holographic briefing, crew roster.">
           الوضع ١ — مركز التحكّم: خريطة مهام، إحاطة هولوغرافية، وقائمة الطاقم.
+        </figcaption>
+      </figure>
+
+      <figure class="shot reveal">
+        <div class="frame">
+          <img src="assets/shot-intro.jpg" width="1400" height="840" loading="lazy" decoding="async"
+               alt="الوضع الأول: منصّة الإطلاق ليلًا مع الصاروخ وبرج الخدمة">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <figcaption data-en="Mode 1 — the launch pad at night: rocket, service tower, feed sourced from the cached DONKI archive.">
+          الوضع ١ — منصّة الإطلاق ليلًا: الصاروخ، برج الخدمة، وشريط حالة مبني على أرشيف DONKI.
+        </figcaption>
+      </figure>
+
+      <figure class="shot reveal">
+        <div class="frame">
+          <img src="assets/shot-odyssey-menu.jpg" width="1400" height="840" loading="lazy" decoding="async"
+               alt="شاشة أوديسي الرئيسية مع ثلاث بطاقات ناسا لايف">
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <figcaption data-en="Mode 2 — the Odyssey title screen: three live tiles (solar flares, near-Earth object, best run) fed by NASA Open APIs when online.">
+          الوضع ٢ — شاشة أوديسي: ثلاث بطاقات حيّة (توهجات الشمس · كويكب يمر اليوم · أفضل نتيجة) من NASA Open APIs عند الاتصال.
         </figcaption>
       </figure>
 
@@ -816,6 +942,7 @@
           <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/README.md" target="_blank" rel="noopener" data-en="README">README</a></li>
           <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/DESIGN.md" target="_blank" rel="noopener" data-en="Design notes">ملاحظات التصميم</a></li>
           <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC/blob/main/SOURCES-AUDIT.md" target="_blank" rel="noopener" data-en="Sources audit">تدقيق المصادر</a></li>
+          <li><a href="docs/ZATHURA-pitch-ar.pptx" data-en="Pitch deck (PPTX)">العرض التقديمي (PPTX)</a></li>
           <li><a href="docs/science-reference-15-scenarios-ar.pdf" target="_blank" rel="noopener" data-en="Science reference (PDF)">المرجع العلمي (PDF)</a></li>
           <li><a href="https://github.com/Eng-OmarAli-146/Zathura_NASA_space_app_ZC" target="_blank" rel="noopener">GitHub</a></li>
         </ul>
